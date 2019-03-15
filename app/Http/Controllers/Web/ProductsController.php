@@ -1,0 +1,72 @@
+<?php
+
+namespace App\Http\Controllers\Web;
+
+use App\Product;
+use App\Status;
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Input;
+
+class ProductsController extends Controller
+{
+    public function index()
+    {
+        return view('products.index');
+    }
+
+    public function pList()
+    {
+        $params = Input::all();
+
+        $products = Product::getCollection($params)->get();
+
+        return view('products.list', [
+            'products' => $products
+        ]);
+    }
+
+    public function editForm()
+    {
+        $id = Input::get('id');
+
+        $product = new Product();
+        if($id)
+        {
+            $product = Product::find($id);
+        }
+
+        return view('products.edit', [
+            'product' => $product,
+        ]);
+    }
+
+    public function submitForm()
+    {
+        $productData = Input::all();
+
+        $product = new Product();
+
+        $product->setDataFromArray($productData);
+
+        $errors = $product->validateData();
+
+        if(!$errors)
+        {
+            if($product->submitData())
+            {
+                return response()->json([
+                    'success' => true,
+                    'message' => 'Продукт был успешно добавлен.'
+                ]);
+            }
+        }
+        else
+        {
+            return response()->json([
+                'success' => false,
+                'message' => $errors[0]
+            ]);
+        }
+    }
+}
