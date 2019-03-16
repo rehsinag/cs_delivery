@@ -45,6 +45,8 @@ class ProductsController extends Controller
     {
         $productData = Input::all();
 
+        $successMessage = $productData['id'] ? 'Продукт был успешно обновлен.' : 'Продукт был успешно добавлен.';
+
         $product = new Product();
 
         $product->setDataFromArray($productData);
@@ -57,7 +59,7 @@ class ProductsController extends Controller
             {
                 return response()->json([
                     'success' => true,
-                    'message' => 'Продукт был успешно добавлен.'
+                    'message' => $successMessage
                 ]);
             }
         }
@@ -66,6 +68,49 @@ class ProductsController extends Controller
             return response()->json([
                 'success' => false,
                 'message' => $errors[0]
+            ]);
+        }
+    }
+
+    public function delete()
+    {
+        $productId = Input::get('productId');
+
+        if($productId)
+        {
+            $product = Product::find($productId);
+            if($product)
+            {
+                $product->status = Status::DELETED;
+
+                if($product->save())
+                {
+                    return response()->json([
+                        'success' => true,
+                        'message' => 'Продукт был успешно удален.'
+                    ]);
+                }
+                else
+                {
+                    return response()->json([
+                        'success' => false,
+                        'message' => 'Ошибка! Произошла ошибка при удалении продукта.'
+                    ]);
+                }
+            }
+            else
+            {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Ошибка! Не найден продукт с указанным идентификатором.'
+                ]);
+            }
+        }
+        else
+        {
+            return response()->json([
+                'success' => false,
+                'message' => 'Ошибка! Не передан идентификатор продукта.'
             ]);
         }
     }

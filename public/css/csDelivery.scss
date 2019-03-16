@@ -1,3 +1,7 @@
 .csDelivery-preloader {
   display: none;
 }
+
+*:disabled {
+  cursor:not-allowed;
+}

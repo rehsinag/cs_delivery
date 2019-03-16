@@ -34,7 +34,9 @@
 @section('scripts')
     <script>
         var Products = {
-            opts: {},
+            opts: {
+                'actual': 1
+            },
 
             list: function () {
                 $.ajax({
@@ -59,7 +61,6 @@
                     id=''
                 $.ajax({
                     url: "{{ route('products.edit') }}",
-                    // url: "/panel/admin/bunches/editForm?id=" + id,
                     type: 'get',
                     data: 'id='+id,
                     beforeSend: function(){csDeliveryPreloader('show')},
@@ -107,7 +108,39 @@
                         );
                     }
                 });
-            }
+            },
+
+            delete: function (productId) {
+                if(!(confirm('Удалить отмеченную запись?'))) {
+                    return false;
+                }
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
+                $.ajax({
+                    url: "{{ route('products.delete') }}",
+                    type: 'post',
+                    data: 'productId='+productId,
+                    beforeSend: function(){csDeliveryPreloader('show')},
+                    complete: function(){csDeliveryPreloader('hide')},
+                    success: function(resp){
+                        if(resp.success) {
+                            Products.list();
+                            csDeliveryNotify(resp.message, 'success');
+                        } else {
+                            csDeliveryNotify(resp.message, 'danger');
+                        }
+                    },
+                    error: function(){
+                        csDeliveryNotify(
+                            'Возникла ошибка на сервере.. Пожалуйста, попробуйте позднее',
+                            'danger'
+                        );
+                    }
+                });
+            },
         }
         $(document).ready(function () {
             Products.list();

@@ -26,6 +26,7 @@ Route::prefix('products')->group(function () {
     Route::get('/list', 'Web\ProductsController@pList')->name('products.list');
     Route::get('/edit', 'Web\ProductsController@editForm')->name('products.edit');
     Route::post('/submit', 'Web\ProductsController@submitForm')->name('products.submit');
+    Route::post('/delete', 'Web\ProductsController@delete')->name('products.delete');
 });
 
 

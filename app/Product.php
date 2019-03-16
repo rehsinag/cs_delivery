@@ -8,9 +8,17 @@ class Product extends Model
 {
     protected $table = 'products';
 
+    public function scopeActual($query)
+    {
+        return $query->whereIn('status', [Status::ACTIVE, Status::INACTIVE]);
+    }
+
     public static function getCollection($params=null)
     {
         $ret = self::select('products.*');
+
+        if(isset($params['actual']) && $params['actual'])
+            $ret->actual();
 
         return $ret;
     }
