@@ -29,6 +29,9 @@
     $(document).ready(function () {
         var selectedProductId;
         var table = $('#productsTable').DataTable({
+            language: {
+                url: "{{ asset('js/dataTables/plugins/i18n/Russian.json') }}"
+            },
             dom:
             "<'row'<'col-lg-6'B><'col-lg-6'f>>" +
             "<'row'<'col-sm-12'tr>>" +
