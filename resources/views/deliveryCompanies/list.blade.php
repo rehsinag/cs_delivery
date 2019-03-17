@@ -1,21 +1,25 @@
 <div class="d-flex-row">
-    <table class="table table-bordered table-hover" id="productsTable">
+    <table class="table table-bordered table-hover" id="deliveryCompaniesTable">
         <thead>
         <tr>
-            <th>Код продукта</th>
+            <th>Код компании</th>
             <th>Наименование</th>
             <th>Описание</th>
+            <th>Адрес</th>
+            <th>Контакт</th>
             <th>Статус</th>
         </tr>
         </thead>
         <tbody>
-        @if(count($products))
-            @foreach($products as $product)
-                <tr id="{{ $product->id }}">
-                    <td>{{ $product->code }}</td>
-                    <td>{{ $product->displayName }}</td>
-                    <td>{{ $product->description }}</td>
-                    <td>{{ \App\Status::code($product->status)->title }}</td>
+        @if(count($deliveryCompanies))
+            @foreach($deliveryCompanies as $deliveryCompany)
+                <tr id="{{ $deliveryCompany->id }}">
+                    <td>{{ $deliveryCompany->code }}</td>
+                    <td>{{ $deliveryCompany->displayName }}</td>
+                    <td>{{ $deliveryCompany->description }}</td>
+                    <td>{{ $deliveryCompany->address }}</td>
+                    <td>{{ $deliveryCompany->contacts }}</td>
+                    <td>{{ \App\Status::code($deliveryCompany->status)->title }}</td>
                 </tr>
             @endforeach
         @else
@@ -24,11 +28,10 @@
     </table>
 </div>
 
-
 <script>
     $(document).ready(function () {
-        var selectedProductId;
-        var table = $('#productsTable').DataTable({
+        var selectedDeliveryCompanyId;
+        var table = $('#deliveryCompaniesTable').DataTable({
             dom:
             "<'row'<'col-lg-6'B><'col-lg-6'f>>" +
             "<'row'<'col-sm-12'tr>>" +
@@ -37,56 +40,56 @@
                 {
                     text: 'Добавить',
                     action: function ( e, dt, node, config ) {
-                        Products.edit();
+                        DeliveryCompanies.edit();
                     }
                 },
                 {
                     text: 'Редактировать',
                     className: 'btn-primary',
                     action: function ( e, dt, node, config ) {
-                        Products.edit(selectedProductId);
+                        DeliveryCompanies.edit(selectedDeliveryCompanyId);
                     },
                     init: function(api, node, config) {
                         $(node).removeClass('btn-secondary');
                         $(node).prop('disabled', 'true');
                     },
                     attr: {
-                        id: 'productEditButton'
+                        id: 'deliveryCompanyEditButton'
                     }
                 },
                 {
                     text: 'Удалить',
                     className: 'btn-danger',
                     action: function ( e, dt, node, config ) {
-                        Products.delete(selectedProductId);
+                        DeliveryCompanies.delete(selectedDeliveryCompanyId);
                     },
                     init: function(api, node, config) {
                         $(node).removeClass('btn-secondary');
                         $(node).prop('disabled', 'true');
                     },
                     attr: {
-                        id: 'productDeleteButton'
+                        id: 'deliveryCompanyDeleteButton'
                     }
                 },
             ]
         });
         if(table.page.info().recordsTotal == 0) {
-            $('#productEditButton').hide();
-            $('#productDeleteButton').hide();
+            $('#deliveryCompanyEditButton').hide();
+            $('#deliveryCompanyDeleteButton').hide();
         }
 
-        $('#productsTable tbody').on( 'click', 'tr', function () {
+        $('#deliveryCompaniesTable tbody').on( 'click', 'tr', function () {
             if ( $(this).hasClass('selected') ) {
                 $(this).removeClass('selected');
-                $('#productEditButton').prop('disabled', true);
-                $('#productDeleteButton').prop('disabled', true);
+                $('#deliveryCompanyEditButton').prop('disabled', true);
+                $('#deliveryCompanyDeleteButton').prop('disabled', true);
             }
             else {
                 table.$('tr.selected').removeClass('selected');
                 $(this).addClass('selected');
-                $('#productEditButton').prop('disabled', false);
-                $('#productDeleteButton').prop('disabled', false);
-                selectedProductId = $(this).attr('id');
+                $('#deliveryCompanyEditButton').prop('disabled', false);
+                $('#deliveryCompanyDeleteButton').prop('disabled', false);
+                selectedDeliveryCompanyId = $(this).attr('id');
             }
         } );
     })

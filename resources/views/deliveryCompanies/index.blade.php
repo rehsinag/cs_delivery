@@ -4,18 +4,18 @@
 @section('content')
     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
         <h1 class="h2">
-            Продукты
+            Курьерские компании
             @include('layouts.preloader')
         </h1>
     </div>
-    <div class="products"></div>
+    <div class="deliveryCompanies"></div>
 
-    <div class="modal fade" tabindex="-1" role="dialog" id="productModal">
+    <div class="modal fade" tabindex="-1" role="dialog" id="deliveryCompanyModal">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title">
-                        Продукт
+                        Курьерская компания
                     </h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
@@ -33,19 +33,19 @@
 
 @section('scripts')
     <script>
-        var Products = {
+        var DeliveryCompanies = {
             opts: {
                 'actual': 1
             },
 
             list: function () {
                 $.ajax({
-                    url: '{{ route('products.list') }}',
-                    data: Products.opts,
+                    url: '{{ route('deliveryCompanies.list') }}',
+                    data: DeliveryCompanies.opts,
                     beforeSend: function(){csDeliveryPreloader('show')},
                     complete: function(){csDeliveryPreloader('hide')},
                     success: function(data){
-                        $('.products').html(data)
+                        $('.deliveryCompanies').html(data)
                     },
                     error: function(){
                         csDeliveryNotify(
@@ -56,18 +56,18 @@
                 })
             },
 
-            edit: function(productId){
-                if(typeof productId=='undefined')
-                    productId=''
+            edit: function(deliveryCompanyId){
+                if(typeof deliveryCompanyId=='undefined')
+                    deliveryCompanyId=''
                 $.ajax({
-                    url: "{{ route('products.edit') }}",
+                    url: "{{ route('deliveryCompanies.edit') }}",
                     type: 'get',
-                    data: 'productId='+productId,
+                    data: 'deliveryCompanyId='+deliveryCompanyId,
                     beforeSend: function(){csDeliveryPreloader('show')},
                     complete: function(){csDeliveryPreloader('hide')},
                     success: function(resp){
-                        $('#productModal .modal-body').html(resp)
-                        $("#productModal").modal()
+                        $('#deliveryCompanyModal .modal-body').html(resp)
+                        $("#deliveryCompanyModal").modal()
                     },
                     error: function(){
                         csDeliveryNotify(
@@ -80,15 +80,15 @@
 
             submit: function () {
                 $.ajax({
-                    url: "{{ route('products.submit') }}",
+                    url: "{{ route('deliveryCompanies.submit') }}",
                     type: 'post',
-                    data: $('#productModalForm').serialize(),
+                    data: $('#deliveryCompanyModalForm').serialize(),
                     beforeSend: function(){csDeliveryPreloader('show')},
                     complete: function(){csDeliveryPreloader('hide')},
                     success: function(resp){
                         if(resp.success) {
-                            $("#productModal").modal('hide');
-                            Products.list();
+                            $("#deliveryCompanyModal").modal('hide');
+                            DeliveryCompanies.list();
                             csDeliveryNotify(resp.message, 'success');
                         } else {
                             $.notify({
@@ -110,7 +110,7 @@
                 });
             },
 
-            delete: function (productId) {
+            delete: function (deliveryCompanyId) {
                 if(!(confirm('Удалить отмеченную запись?'))) {
                     return false;
                 }
@@ -120,14 +120,14 @@
                     }
                 });
                 $.ajax({
-                    url: "{{ route('products.delete') }}",
+                    url: "{{ route('deliveryCompanies.delete') }}",
                     type: 'post',
-                    data: 'productId='+productId,
+                    data: 'deliveryCompanyId='+deliveryCompanyId,
                     beforeSend: function(){csDeliveryPreloader('show')},
                     complete: function(){csDeliveryPreloader('hide')},
                     success: function(resp){
                         if(resp.success) {
-                            Products.list();
+                            DeliveryCompanies.list();
                             csDeliveryNotify(resp.message, 'success');
                         } else {
                             csDeliveryNotify(resp.message, 'danger');
@@ -143,7 +143,7 @@
             },
         }
         $(document).ready(function () {
-            Products.list();
+            DeliveryCompanies.list();
         })
     </script>
 @endsection

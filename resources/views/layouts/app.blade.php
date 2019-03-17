@@ -34,8 +34,13 @@
             <div class="sidebar-sticky">
                 <ul class="nav flex-column">
                     <li class="nav-item">
-                        <a class="nav-link active" href="#">
-                            Продукты <span class="sr-only">(current)</span>
+                        <a class="nav-link @if(\Illuminate\Support\Facades\Route::currentRouteName() == 'products') active @endif" href="{{ route('products') }}">
+                            Продукты
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link @if(\Illuminate\Support\Facades\Route::currentRouteName() == 'deliveryCompanies') active @endif" href="{{ route('deliveryCompanies') }}">
+                            Курьерские компании
                         </a>
                     </li>
                 </ul>

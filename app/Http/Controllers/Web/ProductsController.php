@@ -28,12 +28,12 @@ class ProductsController extends Controller
 
     public function editForm()
     {
-        $id = Input::get('id');
+        $productId = Input::get('productId');
 
         $product = new Product();
-        if($id)
+        if($productId)
         {
-            $product = Product::find($id);
+            $product = Product::find($productId);
         }
 
         return view('products.edit', [
