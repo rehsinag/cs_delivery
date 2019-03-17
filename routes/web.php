@@ -31,7 +31,7 @@ Route::prefix('products')->group(function () {
 // ПРОДУКТЫ --конец
 
 
-// ПРОДУКТЫ --начало
+// КУРЬЕРСКИЕ КОМПАНИИ --начало
 Route::prefix('deliveryCompanies')->group(function () {
     Route::get('/', 'Web\DeliveryCompaniesController@index')->name('deliveryCompanies');
     Route::get('/list', 'Web\DeliveryCompaniesController@pList')->name('deliveryCompanies.list');
@@ -39,7 +39,7 @@ Route::prefix('deliveryCompanies')->group(function () {
     Route::post('/submit', 'Web\DeliveryCompaniesController@submitForm')->name('deliveryCompanies.submit');
     Route::post('/delete', 'Web\DeliveryCompaniesController@delete')->name('deliveryCompanies.delete');
 });
-// ПРОДУКТЫ --конец
+// КУРЬЕРСКИЕ КОМПАНИИ --конец
 
 
 
