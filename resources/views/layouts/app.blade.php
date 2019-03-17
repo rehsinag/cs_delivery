@@ -43,6 +43,11 @@
                             Курьерские компании
                         </a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link @if(\Illuminate\Support\Facades\Route::currentRouteName() == 'deliveryUsers') active @endif" href="{{ route('deliveryUsers') }}">
+                            Курьеры
+                        </a>
+                    </li>
                 </ul>
             </div>
         </nav>

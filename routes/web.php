@@ -41,6 +41,16 @@ Route::prefix('deliveryCompanies')->group(function () {
 });
 // КУРЬЕРСКИЕ КОМПАНИИ --конец
 
+// КУРЬЕРЫ --начало
+Route::prefix('deliveryUsers')->group(function () {
+    Route::get('/', 'Web\DeliveryUsersController@index')->name('deliveryUsers');
+    Route::get('/list', 'Web\DeliveryUsersController@pList')->name('deliveryUsers.list');
+    Route::get('/edit', 'Web\DeliveryUsersController@editForm')->name('deliveryUsers.edit');
+    Route::post('/submit', 'Web\DeliveryUsersController@submitForm')->name('deliveryUsers.submit');
+    Route::post('/delete', 'Web\DeliveryUsersController@delete')->name('deliveryUsers.delete');
+});
+// КУРЬЕРЫ --конец
+
 
 
 Route::get('test', 'TestController@index');
