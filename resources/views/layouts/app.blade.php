@@ -24,7 +24,14 @@
 
     <ul class="navbar-nav px-3">
         <li class="nav-item text-nowrap">
-            <a class="nav-link" href="#">Sign out</a>
+            <a class="nav-link"
+               href="{{ route('logout') }}"
+               onclick="event.preventDefault();
+               document.getElementById('logout-form').submit();"
+            >Sign out</a>
+            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                {{ csrf_field() }}
+            </form>
         </li>
     </ul>
 </nav>
@@ -33,6 +40,11 @@
         <nav class="col-md-2 d-none d-md-block bg-light sidebar">
             <div class="sidebar-sticky">
                 <ul class="nav flex-column">
+                    <li class="nav-item">
+                        <a class="nav-link @if(\Illuminate\Support\Facades\Route::currentRouteName() == 'adminUsers') active @endif" href="{{ route('adminUsers') }}">
+                            Управление пользователями
+                        </a>
+                    </li>
                     <li class="nav-item">
                         <a class="nav-link @if(\Illuminate\Support\Facades\Route::currentRouteName() == 'products') active @endif" href="{{ route('products') }}">
                             Продукты

@@ -19,6 +19,15 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
+// УПРАВЛЕНИЕ ПОЛЬЗОВАТЕЛЯМИ --начало
+Route::prefix('adminUsers')->group(function () {
+    Route::get('/', 'Web\AdminUsersController@index')->name('adminUsers');
+    Route::get('/list', 'Web\AdminUsersController@pList')->name('adminUsers.list');
+    Route::get('/edit', 'Web\AdminUsersController@editForm')->name('adminUsers.edit');
+    Route::post('/submit', 'Web\AdminUsersController@submitForm')->name('adminUsers.submit');
+    Route::post('/delete', 'Web\AdminUsersController@delete')->name('adminUsers.delete');
+});
+// УПРАВЛЕНИЕ ПОЛЬЗОВАТЕЛЯМИ --конец
 
 // ПРОДУКТЫ --начало
 Route::prefix('products')->group(function () {
