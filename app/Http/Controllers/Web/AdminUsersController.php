@@ -84,4 +84,47 @@ class AdminUsersController extends Controller
             ]);
         }
     }
+
+    public function delete()
+    {
+        $adminUserId = Input::get('adminUserId');
+
+        if($adminUserId)
+        {
+            $adminUser = User::find($adminUserId);
+            if($adminUser)
+            {
+//                $deliveryUser->status = Status::DELETED;
+
+                if($adminUser->delete())
+                {
+                    return response()->json([
+                        'success' => true,
+                        'message' => 'Пользователь был успешно удален.'
+                    ]);
+                }
+                else
+                {
+                    return response()->json([
+                        'success' => false,
+                        'message' => 'Ошибка! Произошла ошибка при удалении пользователя.'
+                    ]);
+                }
+            }
+            else
+            {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Ошибка! Не найден пользователь с указанным идентификатором.'
+                ]);
+            }
+        }
+        else
+        {
+            return response()->json([
+                'success' => false,
+                'message' => 'Ошибка! Не передан идентификатор пользователя.'
+            ]);
+        }
+    }
 }

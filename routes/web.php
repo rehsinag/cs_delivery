@@ -19,7 +19,7 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-// УПРАВЛЕНИЕ ПОЛЬЗОВАТЕЛЯМИ --начало
+// УПРАВЛЕНИЕ ПОЛЬЗОВАТЕЛЯМИ СИСТЕМЫ --начало
 Route::prefix('adminUsers')->group(function () {
     Route::get('/', 'Web\AdminUsersController@index')->name('adminUsers');
     Route::get('/list', 'Web\AdminUsersController@pList')->name('adminUsers.list');
@@ -27,7 +27,7 @@ Route::prefix('adminUsers')->group(function () {
     Route::post('/submit', 'Web\AdminUsersController@submitForm')->name('adminUsers.submit');
     Route::post('/delete', 'Web\AdminUsersController@delete')->name('adminUsers.delete');
 });
-// УПРАВЛЕНИЕ ПОЛЬЗОВАТЕЛЯМИ --конец
+// УПРАВЛЕНИЕ ПОЛЬЗОВАТЕЛЯМИ СИСТЕМЫ --конец
 
 // ПРОДУКТЫ --начало
 Route::prefix('products')->group(function () {
