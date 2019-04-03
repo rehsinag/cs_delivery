@@ -124,6 +124,6 @@ class DeliveryUser extends Model
     public function init()
     {
         $this->deliveryCompany          = DeliveryCompany::find($this->companyId);
-        $this->branch                   = Branch::find($this->branchId);
+        $this->branch                   = BranchCatalog::find($this->branchId);
     }
 }

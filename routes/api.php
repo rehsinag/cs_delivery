@@ -16,3 +16,14 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::middleware(['auth:api'])->group(function () {
+    Route::get('/deliveryOrders', 'Api\DeliveryOrdersController@index');
+});
+
+Route::post('/deliveryOrders/submit', 'Api\DeliveryOrdersController@submitForm');
+
+
+Route::get('/catalogs/branches/list', 'Api\CatalogsController@branchesList');
+Route::get('/catalogs/cities/list', 'Api\CatalogsController@citiesList');
+Route::get('/catalogs/counties/list', 'Api\CatalogsController@countiesList');

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Web;
 
 use App\Branch;
+use App\BranchCatalog;
 use App\DeliveryCompany;
 use App\DeliveryUser;
 use App\Status;
@@ -48,7 +49,7 @@ class DeliveryUsersController extends Controller
 
         $deliveryCompanies = DeliveryCompany::getCollection(['actual' => 1])->get();
 
-        $branches = Branch::getCollection(['actual' => 1])->get();
+        $branches = BranchCatalog::getCollection(['actual' => 1])->get();
 
         return view('deliveryUsers.edit', [
             'deliveryUser' => $deliveryUser,

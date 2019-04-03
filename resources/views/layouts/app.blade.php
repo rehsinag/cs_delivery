@@ -28,7 +28,7 @@
                href="{{ route('logout') }}"
                onclick="event.preventDefault();
                document.getElementById('logout-form').submit();"
-            >Sign out</a>
+            >Выйти</a>
             <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                 {{ csrf_field() }}
             </form>
@@ -40,11 +40,34 @@
         <nav class="col-md-2 d-none d-md-block bg-light sidebar">
             <div class="sidebar-sticky">
                 <ul class="nav flex-column">
+                    @role('root')
                     <li class="nav-item">
                         <a class="nav-link @if(\Illuminate\Support\Facades\Route::currentRouteName() == 'adminUsers') active @endif" href="{{ route('adminUsers') }}">
                             Управление пользователями
                         </a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link @if(\Illuminate\Support\Facades\Route::currentRouteName() == 'catalogs.branches') active @endif" href="{{ route('catalogs.branches') }}">
+                            Справочники филиалов
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link @if(\Illuminate\Support\Facades\Route::currentRouteName() == 'catalogs.cities') active @endif" href="{{ route('catalogs.cities') }}">
+                            Справочники городов
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link @if(\Illuminate\Support\Facades\Route::currentRouteName() == 'catalogs.counties') active @endif" href="{{ route('catalogs.counties') }}">
+                            Справочники районов
+                        </a>
+                    </li>
+                    {{--<li class="nav-item">--}}
+                        {{--<a class="nav-link @if(\Illuminate\Support\Facades\Route::currentRouteName() == 'adminUsersRoles') active @endif" href="{{ route('adminUsersRoles') }}">--}}
+                            {{--Управление ролями--}}
+                        {{--</a>--}}
+                    {{--</li>--}}
+                    @endrole
+                    <hr>
                     <li class="nav-item">
                         <a class="nav-link @if(\Illuminate\Support\Facades\Route::currentRouteName() == 'products') active @endif" href="{{ route('products') }}">
                             Продукты
@@ -58,6 +81,12 @@
                     <li class="nav-item">
                         <a class="nav-link @if(\Illuminate\Support\Facades\Route::currentRouteName() == 'deliveryUsers') active @endif" href="{{ route('deliveryUsers') }}">
                             Курьеры
+                        </a>
+                    </li>
+                    <hr>
+                    <li class="nav-item">
+                        <a class="nav-link @if(\Illuminate\Support\Facades\Route::currentRouteName() == 'deliveryOrders') active @endif" href="{{ route('deliveryOrders') }}">
+                            Заявки
                         </a>
                     </li>
                 </ul>
