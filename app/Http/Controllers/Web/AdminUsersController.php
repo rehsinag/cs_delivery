@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers\Web;
 
+use App\BranchCatalog;
 use App\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Input;
 
 class AdminUsersController extends Controller
@@ -19,6 +21,19 @@ class AdminUsersController extends Controller
         $params = Input::all();
 
         $adminUsers = User::all();
+
+        if(!Auth::user()->hasRole('root'))
+        {
+            $tmp = [];
+
+            foreach ($adminUsers as $adminUser)
+            {
+                if(!$adminUser->hasRole('root'))
+                    $tmp[] = $adminUser;
+            }
+
+            $adminUsers = $tmp;
+        }
 
 //        if(count($adminUsers))
 //        {
@@ -43,12 +58,18 @@ class AdminUsersController extends Controller
             $adminUser = User::find($adminUserId);
         }
 
+        $branches = BranchCatalog::getCollection(['actual' => 1])->get();
+
+        if($adminUser->hasRole('supervisor'))
+            $adminUser->initBranch();
+
 //        $deliveryCompanies = DeliveryCompany::getCollection(['actual' => 1])->get();
 //
 //        $branches = Branch::getCollection(['actual' => 1])->get();
 
         return view('adminUsers.edit', [
             'adminUser' => $adminUser,
+            'branches'  => $branches
 //            'deliveryCompanies' => $deliveryCompanies,
 //            'branches' => $branches
         ]);

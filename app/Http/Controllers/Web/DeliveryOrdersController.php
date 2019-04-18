@@ -5,8 +5,10 @@ namespace App\Http\Controllers\Web;
 use App\CityCatalog;
 use App\CountyCatalog;
 use App\DeliveryOrder;
+use App\UserRole;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Input;
 
 class DeliveryOrdersController extends Controller
@@ -19,6 +21,13 @@ class DeliveryOrdersController extends Controller
     public function pList()
     {
         $params = Input::all();
+
+        if(Auth::user()->hasRole(UserRole::SUPERVISOR))
+        {
+            Auth::user()->initBranch();
+
+            $params['branchId'] = 1;
+        }
 
         $deliveryOrders = DeliveryOrder::getCollection($params)->get();
 

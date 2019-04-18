@@ -74,8 +74,9 @@ class AdminUsersRolesController extends Controller
             if($adminUsersRoleData['id'])
                 $adminUsersRole = Role::findById($adminUsersRoleData['id']);
 
-            $adminUsersRole->name = trim($adminUsersRoleData['name']);
-            $adminUsersRole->guard_name = 'web';
+            $adminUsersRole->name           = trim($adminUsersRoleData['name']);
+            $adminUsersRole->displayName    = trim($adminUsersRoleData['displayName']);
+            $adminUsersRole->guard_name     = 'web';
 
             if($adminUsersRole->save())
             {

@@ -23,7 +23,7 @@ class DeliveryOrdersController extends Controller
     {
         $deliveryOrderData = Input::all();
 
-        $successMessage = $deliveryOrderData['id'] ? 'Данные заявки были успешно обновлены.' : 'Заявка была успешно добавлена.';
+        $successMessage = isset($deliveryOrderData['id']) ? 'Данные заявки были успешно обновлены.' : 'Заявка была успешно добавлена.';
 
         $deliveryOrder = new DeliveryOrder();
 
