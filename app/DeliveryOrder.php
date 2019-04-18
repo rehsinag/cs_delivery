@@ -8,9 +8,12 @@ class DeliveryOrder extends Model
 {
     protected $table = 'deliveryOrders';
 
-    public static function getCollection()
+    public static function getCollection($params=null)
     {
         $ret = self::select('deliveryOrders.*');
+
+        if(isset($params['branchId']) && $params['branchId'])
+            $ret->where('branchId', $params['branchId']);
 
         return $ret;
     }

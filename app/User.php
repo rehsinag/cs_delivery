@@ -45,6 +45,12 @@ class User extends Authenticatable
 
         if(isset($data['name']) && trim($data['name']))
             $this->name = trim($data['name']);
+
+        if(isset($data['role']) && trim($data['role']))
+            $this->role = trim($data['role']);
+
+        if(isset($data['branch']) && trim($data['branch']))
+            $this->branch = trim($data['branch']);
     }
 
     public function validateData()
@@ -54,7 +60,7 @@ class User extends Authenticatable
         if(!$this->login || $this->login == null)
             $errors[] = 'Необходимо указать логин пользователя';
 
-        if(!$this->password || $this->password == null)
+        if(!$this->id && (!$this->password || $this->password == null))
             $errors[] = 'Необходимо указать пароль пользователя';
 
         if(!$this->email || $this->email == null)
@@ -62,6 +68,10 @@ class User extends Authenticatable
 
         if(!$this->name || $this->name == null)
             $errors[] = 'Необходимо указать имя пользователя';
+
+        if($this->role == UserRole::SUPERVISOR && (!$this->branch || $this->branch == null))
+            $errors[] = 'Необходимо указать филиал пользователя';
+
 
         return $errors;
     }
@@ -74,12 +84,42 @@ class User extends Authenticatable
             $adminUser = self::find($this->id);
 
         $adminUser->login           = $this->login;
-        $adminUser->password        = bcrypt($this->password);
+        if($this->password)
+            $adminUser->password        = bcrypt($this->password);
         $adminUser->email           = $this->email;
         $adminUser->name            = $this->name;
 
+        $adminUser->syncRoles($this->role);
+
         $adminUser->save();
 
+        if($this->role == UserRole::SUPERVISOR && $this->branch)
+        {
+            UserByBranch::updateOrCreate(
+                [
+                    'userId' => $adminUser->id,
+                ],
+                [
+                    'branchId' => $this->branch
+                ]
+            );
+        }
+        else
+        {
+            UserByBranch::where('userId', $adminUser->id)->delete();
+        }
+
+
         return $adminUser;
+    }
+
+    public function initBranch()
+    {
+        $userBranchId = UserByBranch::where('userId', $this->id)->first();
+
+        if($userBranchId)
+        {
+            $this->branchObj = BranchCatalog::find($userBranchId->branchId);
+        }
     }
 }
