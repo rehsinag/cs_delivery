@@ -1,3 +1,4 @@
+@php $versionForStylesAndScripts = '040420191' @endphp
 <!DOCTYPE html>
 <html lang="{{ app()->getLocale() }}">
 <head>
@@ -15,17 +16,18 @@
     <link href="{{ asset('css/datatables.min.css') }}" rel="stylesheet">
     <link href="{{ asset('css/all.min.css') }}" rel="stylesheet">
     <link href="{{ asset('css/dashboard.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/csDelivery.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/csDelivery.css') }}?v={{$versionForStylesAndScripts}}" rel="stylesheet">
     {{--<link href="{{ asset('css/app.css') }}" rel="stylesheet">--}}
 </head>
 <body>
-<div class="container-fluid">
-    <div class="row">
-        <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
-            @yield('content')
-        </main>
-    </div>
-</div>
+@yield('content')
+
+{{--<div class="container-fluid">--}}
+    {{--<div class="row">--}}
+        {{--<main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">--}}
+        {{--</main>--}}
+    {{--</div>--}}
+{{--</div>--}}
 
 <!-- Scripts -->
 <script src="{{ asset('js/jquery-3.3.1.min.js') }}"></script>

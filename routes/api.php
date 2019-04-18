@@ -27,3 +27,5 @@ Route::post('/deliveryOrders/submit', 'Api\DeliveryOrdersController@submitForm')
 Route::get('/catalogs/branches/list', 'Api\CatalogsController@branchesList');
 Route::get('/catalogs/cities/list', 'Api\CatalogsController@citiesList');
 Route::get('/catalogs/counties/list', 'Api\CatalogsController@countiesList');
+
+Route::get('/products/list', 'Api\ProductsController@pList');

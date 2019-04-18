@@ -61,13 +61,13 @@
                             Справочники районов
                         </a>
                     </li>
-                    {{--<li class="nav-item">--}}
-                        {{--<a class="nav-link @if(\Illuminate\Support\Facades\Route::currentRouteName() == 'adminUsersRoles') active @endif" href="{{ route('adminUsersRoles') }}">--}}
-                            {{--Управление ролями--}}
-                        {{--</a>--}}
-                    {{--</li>--}}
-                    @endrole
+                    <li class="nav-item">
+                        <a class="nav-link @if(\Illuminate\Support\Facades\Route::currentRouteName() == 'adminUsersRoles') active @endif" href="{{ route('adminUsersRoles') }}">
+                            Управление ролями
+                        </a>
+                    </li>
                     <hr>
+                    @endrole
                     <li class="nav-item">
                         <a class="nav-link @if(\Illuminate\Support\Facades\Route::currentRouteName() == 'products') active @endif" href="{{ route('products') }}">
                             Продукты
