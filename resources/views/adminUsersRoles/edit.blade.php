@@ -7,6 +7,12 @@
             <input type="text" class="form-control" id="name" name="name" value="{{ $adminUsersRole->name }}">
         </div>
     </div>
+    <div class="form-group row">
+        <label for="displayName" class="col-sm-3 col-form-label">Отображаемое имя</label>
+        <div class="col-sm-9">
+            <input type="text" class="form-control" id="displayName" name="displayName" value="{{ $adminUsersRole->displayName }}">
+        </div>
+    </div>
     <hr>
     <div class="form-group row">
         <div class="col-sm-9">

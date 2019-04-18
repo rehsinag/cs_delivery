@@ -7,6 +7,7 @@
             <th>Имя</th>
             <th>Email</th>
             <th>Дата регистрации</th>
+            <th>Роли</th>
         </tr>
         </thead>
         <tbody>
@@ -18,6 +19,7 @@
                     <td>***</td>
                     <td>{{ $adminUser->email }}</td>
                     <td>{{ \Carbon\Carbon::parse($adminUser->created_at)->format('d.m.Y H:i:s') }}</td>
+                    <td>{{ $adminUser->getRoleNames() }}</td>
                 </tr>
             @endforeach
         @else

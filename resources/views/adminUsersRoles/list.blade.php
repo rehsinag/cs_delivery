@@ -4,6 +4,7 @@
         <tr>
             <th>ID</th>
             <th>Название</th>
+            <th>Отображаемое имя</th>
         </tr>
         </thead>
         <tbody>
@@ -12,6 +13,7 @@
                 <tr id="{{ $adminUsersRole->id }}">
                     <td>{{ $adminUsersRole->id }}</td>
                     <td><strong>{{ $adminUsersRole->name }}</strong></td>
+                    <td><strong>{{ $adminUsersRole->displayName }}</strong></td>
                 </tr>
             @endforeach
         @else
