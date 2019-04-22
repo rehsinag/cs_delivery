@@ -3,9 +3,13 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
+use Spatie\MediaLibrary\HasMedia\Interfaces\HasMedia;
 
-class DeliveryOrder extends Model
+class DeliveryOrder extends Model implements HasMedia
 {
+    use HasMediaTrait;
+
     protected $table = 'deliveryOrders';
 
     public static function getCollection($params=null)
@@ -69,6 +73,12 @@ class DeliveryOrder extends Model
 
         if(isset($data['comments']) && trim($data['comments']))
             $this->comments = trim($data['comments']);
+
+        if(isset($data['fileIDCardA']) && trim($data['fileIDCardA']))
+            $this->fileIDCardA = trim($data['fileIDCardA']);
+
+        if(isset($data['fileIDCardB']) && trim($data['fileIDCardB']))
+            $this->fileIDCardB = trim($data['fileIDCardB']);
     }
 
     public function validateData()
@@ -144,6 +154,16 @@ class DeliveryOrder extends Model
         $deliveryOrder->deliveryDate = $this->deliveryDate;
             
         $deliveryOrder->save();
+
+        if(isset($this->fileIDCardA))
+        {
+            $deliveryOrder->addMediaFromRequest('fileIDCardA')->withCustomProperties(['type' => 'idCardA'])->toMediaLibrary('orderClientDocs');
+        }
+
+        if(isset($this->fileIDCardB))
+        {
+            $deliveryOrder->addMediaFromRequest('fileIDCardB')->withCustomProperties(['type' => 'idCardB'])->toMediaLibrary('orderClientDocs');
+        }
 
         return $deliveryOrder;
     }
