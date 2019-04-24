@@ -33,3 +33,5 @@ Route::get('/catalogs/cities/list', 'Api\CatalogsController@citiesList');
 Route::get('/catalogs/counties/list', 'Api\CatalogsController@countiesList');
 
 Route::get('/products/list', 'Api\ProductsController@pList');
+
+Route::post('/deliveryUsers/login', 'Api\DeliveryUsersController@login');
