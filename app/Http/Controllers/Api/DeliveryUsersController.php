@@ -22,11 +22,11 @@ class DeliveryUsersController extends Controller
             {
                 if(password_verify($password, $deliveryUser->password))
                 {
-                    echo 'good';
+                    echo 'good!';
                 }
                 else
                 {
-                    echo 'nope';
+                    echo 'nope!';
                 }
             }
             else
