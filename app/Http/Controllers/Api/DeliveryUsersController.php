@@ -26,7 +26,7 @@ class DeliveryUsersController extends Controller
                 }
                 else
                 {
-                    echo 'nope!';
+                    return false;
                 }
             }
             else
