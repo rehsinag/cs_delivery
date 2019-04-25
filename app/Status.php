@@ -7,6 +7,7 @@ class Status
     const ACTIVE    = 1;
     const INACTIVE  = 2;
     const DELETED   = 99;
+    const COMPLETED = 10;
 
     private static $arr = [
         self::ACTIVE => [
@@ -20,6 +21,10 @@ class Status
         self::DELETED => [
             'code' => self::DELETED,
             'title'=>'Удаленный',
+        ],
+        self::COMPLETED => [
+            'code' => self::COMPLETED,
+            'title'=>'Завершен',
         ],
     ];
 
