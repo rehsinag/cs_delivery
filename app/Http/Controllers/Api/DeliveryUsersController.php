@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\DeliveryUser;
+use App\UserByBranch;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Input;
@@ -22,11 +23,16 @@ class DeliveryUsersController extends Controller
             {
                 if(password_verify($password, $deliveryUser->password))
                 {
-                    echo 'good!';
+                    return response()->json([
+                        'success' => true,
+                        'message' => [
+                            'branchId' => $deliveryUser->branchId
+                        ]
+                    ]);
                 }
                 else
                 {
-                    return false;
+                    return 'false';
                 }
             }
             else

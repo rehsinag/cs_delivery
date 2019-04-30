@@ -23,6 +23,9 @@ Route::middleware(['auth:api'])->group(function () {
 
 Route::post('/deliveryOrders/submit', 'Api\DeliveryOrdersController@submitForm');
 Route::get('/deliveryOrders/files', 'Api\DeliveryOrdersController@getFiles');
+Route::post('/deliveryOrders/uploadFiles', 'Api\DeliveryOrdersController@uploadFiles');
+Route::post('/deliveryOrders/changeComment', 'Api\DeliveryOrdersController@changeComment');
+Route::post('/deliveryOrders/sicStatusComplete', 'Api\DeliveryOrdersController@changeSicStatusToComplete');
 
 Route::post('/deliveryOrders/status/sd/received', 'Api\DeliveryOrdersController@setSDStatusReceived');
 Route::post('/deliveryOrders/status/sd/verified', 'Api\DeliveryOrdersController@setSDStatusVerified');
