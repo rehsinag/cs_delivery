@@ -14,7 +14,7 @@ class CreateViewWithProcessedDeliveryOrders extends Migration
     public function up()
     {
         DB::unprepared('CREATE VIEW `deliveryOrdersProcessed` AS
-            select * from `deliveryOrders` where `status` = "' . \App\Status::COMPLETED .'"
+            select * from `deliveryOrders` where `status` = "' . \App\Status::DELIVERED .'"
         ');
     }
 
