@@ -6,6 +6,7 @@ use App\CityCatalog;
 use App\CountyCatalog;
 use App\DeliveryOrder;
 use App\DeliveryUser;
+use App\Status;
 use App\UserRole;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -188,6 +189,7 @@ class DeliveryOrdersController extends Controller
         $deliveryOrder = DeliveryOrder::find($deliveryOrderData['id']);
 
         $deliveryOrder->deliveryUserId = $deliveryOrderData['deliveryUser'];
+        $deliveryOrder->status = Status::PROCESS;
 
         if ($deliveryOrder->save())
         {
