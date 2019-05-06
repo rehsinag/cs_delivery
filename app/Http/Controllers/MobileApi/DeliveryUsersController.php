@@ -32,26 +32,30 @@ class DeliveryUsersController extends Controller
                 }
                 else
                 {
-                    return response()->json([
-                        'error_code' => '-100',
-                        'error_message' => 'Не правильный логин или пароль.'
-                    ]);
+                    return response('Unauthorized.', 401);
+//                    return response()->json([
+//                        'error_code' => '-100',
+//                        'error_message' => 'Не правильный логин или пароль.'
+//                    ]);
                 }
             }
             else
             {
-                return response()->json([
-                    'error_code' => '-100',
-                    'error_message' => 'Не правильный логин или пароль.'
-                ]);
+                return response('Unauthorized.', 401);
+//                return response()->json([
+//                    'error_code' => '-100',
+//                    'error_message' => 'Не правильный логин или пароль.'
+//                ]);
             }
         }
         else
         {
-            return response()->json([
-                'error_code' => '-103',
-                'error_message' => 'Заполните имя и пароль пользователя.'
-            ]);
+            return response('Unauthorized.', 401);
+//
+//            return response()->json([
+//                'error_code' => '-103',
+//                'error_message' => 'Заполните имя и пароль пользователя.'
+//            ]);
         }
     }
 
