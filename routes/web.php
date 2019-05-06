@@ -103,6 +103,15 @@ Route::middleware(['auth'])->group(function () {
     });
     // ЗАЯВКИ --конец
 
+    // ДОСЬЕ ПРИНЯТО --начало
+    Route::prefix('deliveryOrders/setCourier')->group(function () {
+        Route::get('/', 'Web\DeliveryOrdersController@setCourierIndex')->name('deliveryOrders.setCourier');
+        Route::get('/list', 'Web\DeliveryOrdersController@setCourierList')->name('deliveryOrders.setCourier.list');
+        Route::get('/edit', 'Web\DeliveryOrdersController@setCourierEditForm')->name('deliveryOrders.setCourier.edit');
+        Route::post('/submit', 'Web\DeliveryOrdersController@setCourierSubmitForm')->name('deliveryOrders.setCourier.submit');
+    });
+    // ДОСЬЕ ПРИНЯТО --конец
+
 
 
     Route::get('test', 'TestController@index');

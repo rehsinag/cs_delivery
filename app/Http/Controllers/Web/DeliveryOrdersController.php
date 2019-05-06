@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Web;
 use App\CityCatalog;
 use App\CountyCatalog;
 use App\DeliveryOrder;
+use App\DeliveryUser;
 use App\UserRole;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -132,6 +133,67 @@ class DeliveryOrdersController extends Controller
             return response()->json([
                 'success' => false,
                 'message' => 'Ошибка! Не передан идентификатор заявки.'
+            ]);
+        }
+    }
+
+    public function setCourierIndex()
+    {
+        return view('deliveryOrdersSetCourier.index');
+    }
+
+    public function setCourierList()
+    {
+        $params = Input::all();
+
+        if(Auth::user()->hasRole(UserRole::SUPERVISOR))
+        {
+            Auth::user()->initBranch();
+
+            $params['branchId'] = 1;
+        }
+        $params['new'] = 1;
+
+        $deliveryOrders = DeliveryOrder::getCollection($params)->get();
+
+        return view('deliveryOrdersSetCourier.list', [
+            'deliveryOrders' => $deliveryOrders
+        ]);
+    }
+
+    public function setCourierEditForm()
+    {
+        $deliveryOrderId = Input::get('deliveryOrderId');
+
+        $deliveryOrder = new DeliveryOrder();
+        if($deliveryOrderId)
+        {
+            $deliveryOrder = DeliveryOrder::find($deliveryOrderId);
+        }
+
+        $deliveryUsers = DeliveryUser::getCollection(['actual' => 1])->get();
+
+        return view('deliveryOrdersSetCourier.edit', [
+            'deliveryOrder' => $deliveryOrder,
+            'deliveryUsers' => $deliveryUsers
+        ]);
+    }
+
+    public function setCourierSubmitForm()
+    {
+        $deliveryOrderData = Input::all();
+
+        $successMessage = 'Курьер был успешно назначен.';
+
+        $deliveryOrder = DeliveryOrder::find($deliveryOrderData['id']);
+
+        $deliveryOrder->deliveryUserId = $deliveryOrderData['deliveryUser'];
+
+        if ($deliveryOrder->save())
+        {
+            return response()->json([
+                'success' => true,
+                'message' => $successMessage
             ]);
         }
     }

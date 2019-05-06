@@ -66,13 +66,13 @@
                             Управление ролями
                         </a>
                     </li>
-                    <hr>
-                    @endrole
                     <li class="nav-item">
                         <a class="nav-link @if(\Illuminate\Support\Facades\Route::currentRouteName() == 'products') active @endif" href="{{ route('products') }}">
                             Продукты
                         </a>
                     </li>
+                    <hr>
+                    @endrole
                     <li class="nav-item">
                         <a class="nav-link @if(\Illuminate\Support\Facades\Route::currentRouteName() == 'deliveryCompanies') active @endif" href="{{ route('deliveryCompanies') }}">
                             Курьерские компании
@@ -84,6 +84,11 @@
                         </a>
                     </li>
                     <hr>
+                    <li class="nav-item">
+                        <a class="nav-link @if(\Illuminate\Support\Facades\Route::currentRouteName() == 'deliveryOrders.setCourier') active @endif" href="{{ route('deliveryOrders.setCourier') }}">
+                            Досье принято
+                        </a>
+                    </li>
                     <li class="nav-item">
                         <a class="nav-link @if(\Illuminate\Support\Facades\Route::currentRouteName() == 'deliveryOrders') active @endif" href="{{ route('deliveryOrders') }}">
                             Заявки

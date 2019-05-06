@@ -12,12 +12,20 @@ class DeliveryOrder extends Model implements HasMedia
 
     protected $table = 'deliveryOrders';
 
+    public function scopeNew($query)
+    {
+        return $query->whereNull('deliveryUserId');
+    }
+
     public static function getCollection($params=null)
     {
         $ret = self::select('deliveryOrders.*');
 
         if(isset($params['branchId']) && $params['branchId'])
             $ret->where('branchId', $params['branchId']);
+
+        if(isset($params['new']) && $params['new'])
+            $ret->new();
 
         return $ret;
     }
