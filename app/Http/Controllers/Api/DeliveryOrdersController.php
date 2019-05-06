@@ -52,6 +52,46 @@ class DeliveryOrdersController extends Controller
         }
     }
 
+    public function queueStatusComplete()
+    {
+        $orderID = Input::get('id');
+
+        if($orderID)
+        {
+            $order = DeliveryOrder::find($orderID);
+
+            if($order)
+            {
+                $order->sicStatus = 'A';
+
+                if($order->save())
+                {
+                    return response()->json([
+                        'success' => false,
+                        'status' => 200,
+                        'message' => 'Статус SIC был успешно изменен.'
+                    ]);
+                }
+            }
+            else
+            {
+                return response()->json([
+                    'success' => false,
+                    'status' => 500,
+                    'message' => 'Не найдена заявка с указанным идентификатором.'
+                ]);
+            }
+        }
+        else
+        {
+            return response()->json([
+                'success' => false,
+                'status' => 500,
+                'message' => 'Не передан идентификатор заявки.'
+            ]);
+        }
+    }
+
     public function submitForm()
     {
         $deliveryOrderData = Input::all();
@@ -371,43 +411,5 @@ class DeliveryOrdersController extends Controller
         }
     }
 
-    public function changeSicStatusToComplete()
-    {
-        $orderID = Input::get('orderID');
 
-        if($orderID)
-        {
-            $order = DeliveryOrder::find($orderID);
-
-            if($order)
-            {
-                $order->sicStatus = 'A';
-
-                if($order->save())
-                {
-                    return response()->json([
-                        'success' => false,
-                        'status' => 200,
-                        'message' => 'Статус SIC был успешно изменен.'
-                    ]);
-                }
-            }
-            else
-            {
-                return response()->json([
-                    'success' => false,
-                    'status' => 500,
-                    'message' => 'Не найдена заявка с указанным идентификатором.'
-                ]);
-            }
-        }
-        else
-        {
-            return response()->json([
-                'success' => false,
-                'status' => 500,
-                'message' => 'Не передан идентификатор заявки.'
-            ]);
-        }
-    }
 }
