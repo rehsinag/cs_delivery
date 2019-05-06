@@ -78,6 +78,9 @@ class DeliveryOrder extends Model implements HasMedia
         if(isset($data['comments']) && trim($data['comments']))
             $this->comments = trim($data['comments']);
 
+        if(isset($data['status']) && trim($data['status']))
+            $this->status = trim($data['status']);
+
         if(isset($data['fileIDCardA']) && trim($data['fileIDCardA']))
             $this->fileIDCardA = trim($data['fileIDCardA']);
 
@@ -167,7 +170,7 @@ class DeliveryOrder extends Model implements HasMedia
         if(isset($this->comments))
             $deliveryOrder->comments = $this->comments;
 
-        $deliveryOrder->status = Status::DOSSIER_TAKEN;
+        $deliveryOrder->status = (isset($this->status)) ? $this->status : Status::DOSSIER_TAKEN;
 
         $deliveryOrder->save();
 
