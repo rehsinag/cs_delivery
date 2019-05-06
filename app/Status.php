@@ -10,6 +10,9 @@ class Status
     const DELIVERED         = 10;
     const REJECT_PRODUCT    = 11;
     const REJECT_DELIVERY   = 12;
+    const PROCESS           = 13;
+    const DOSSIER_TAKEN     = 30;
+    const REAPPLICATION     = 50;
 
     private static $arr = [
         self::ACTIVE => [
@@ -35,6 +38,18 @@ class Status
         self::REJECT_DELIVERY => [
             'code' => self::REJECT_DELIVERY,
             'title'=>'Отказ от доставки',
+        ],
+        self::PROCESS => [
+            'code' => self::PROCESS,
+            'title'=>'В процессе доставки',
+        ],
+        self::DOSSIER_TAKEN => [
+            'code' => self::DOSSIER_TAKEN,
+            'title'=>'Досье принято',
+        ],
+        self::REAPPLICATION => [
+            'code' => self::REAPPLICATION,
+            'title'=>'Повторная заявка',
         ],
     ];
 

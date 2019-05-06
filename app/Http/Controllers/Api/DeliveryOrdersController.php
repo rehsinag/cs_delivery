@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\DeliveryOrder;
 use App\DeliveryOrderStatus;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Input;
@@ -18,6 +19,37 @@ class DeliveryOrdersController extends Controller
                 'message' => 'Hello, World!'
             ]
         ]);
+    }
+
+    public function create()
+    {
+        $deliveryOrderData = Input::all();
+
+        $deliveryOrder = new DeliveryOrder();
+
+        $deliveryOrder->setDataFromArray($deliveryOrderData);
+
+        $errors = $deliveryOrder->validateData();
+
+        if(!$errors)
+        {
+            if($deliveryOrder->submitData())
+            {
+                return response()->json([
+                    'success' => true,
+                    'status' => 200,
+                    'message' => 'Заявка была успешно добавлена.'
+                ]);
+            }
+        }
+        else
+        {
+            return response()->json([
+                'success' => false,
+                'status' => 500,
+                'message' => $errors[0]
+            ]);
+        }
     }
 
     public function submitForm()
@@ -272,9 +304,51 @@ class DeliveryOrdersController extends Controller
                 if($order->save())
                 {
                     return response()->json([
-                        'success' => false,
+                        'success' => true,
                         'status' => 200,
                         'message' => 'Комментарий были успешно добавлены.'
+                    ]);
+                }
+            }
+            else
+            {
+                return response()->json([
+                    'success' => false,
+                    'status' => 500,
+                    'message' => 'Не найдена заявка с указанным идентификатором.'
+                ]);
+            }
+        }
+        else
+        {
+            return response()->json([
+                'success' => false,
+                'status' => 500,
+                'message' => 'Не передан идентификатор заявки.'
+            ]);
+        }
+    }
+
+    public function changeStatus()
+    {
+        $orderID = Input::get('orderID');
+        $status = Input::get('status');
+
+        if($orderID)
+        {
+            $order = DeliveryOrder::find($orderID);
+
+            if($order)
+            {
+                $order->status = $status;
+                $order->delivered_at = Carbon::now();
+
+                if($order->save())
+                {
+                    return response()->json([
+                        'success' => true,
+                        'status' => 200,
+                        'message' => 'Статус был успешно изменен.'
                     ]);
                 }
             }

@@ -34,6 +34,10 @@ class DeliveryOrder extends Model implements HasMedia
 
     public function setDataFromArray($data)
     {
+        if(isset($data['requestId']) && trim($data['requestId']))
+            $this->requestId = trim($data['requestId']);
+        if(isset($data['eventId']) && trim($data['eventId']))
+            $this->eventId = trim($data['eventId']);
         if(isset($data['productId']) && trim($data['productId']))
             $this->productId = trim($data['productId']);
         if(isset($data['deliveryUserId']) && trim($data['deliveryUserId']))
@@ -100,12 +104,17 @@ class DeliveryOrder extends Model implements HasMedia
         if(!$this->phone || $this->phone == null)
             $errors[] = 'Необходимо указать Телефон клиента!';
 
+        if(!$this->requestId || $this->requestId == null)
+            $errors[] = 'Необходимо указать Идентификатор заявки!';
 
         if(!$this->productId || $this->productId == null)
             $errors[] = 'Необходимо указать Продукт!';    
 
         if(!$this->branchId || $this->branchId == null)
-            $errors[] = 'Необходимо указать Филиал!';    
+            $errors[] = 'Необходимо указать Филиал!';
+
+        if(!$this->eventId || $this->eventId == null)
+            $errors[] = 'Необходимо указать event_id!';
 
         if(!$this->city || $this->city == null)
             $errors[] = 'Необходимо указать Город!';
@@ -144,26 +153,33 @@ class DeliveryOrder extends Model implements HasMedia
         $deliveryOrder->middleName = $this->middleName;
         $deliveryOrder->iin = $this->iin;
         $deliveryOrder->phone = $this->phone;
+        $deliveryOrder->requestId = $this->requestId;
         $deliveryOrder->productId = $this->productId;
         $deliveryOrder->branchId = $this->branchId;
+        $deliveryOrder->eventId = $this->eventId;
         $deliveryOrder->city = $this->city;
         $deliveryOrder->county = $this->county;
         $deliveryOrder->street = $this->street;
         $deliveryOrder->house = $this->house;
         $deliveryOrder->apartment = $this->apartment;
         $deliveryOrder->deliveryDate = $this->deliveryDate;
-            
+
+        if(isset($this->comments))
+            $deliveryOrder->comments = $this->comments;
+
+        $deliveryOrder->status = Status::DOSSIER_TAKEN;
+
         $deliveryOrder->save();
 
-        if(isset($this->fileIDCardA))
-        {
-            $deliveryOrder->addMediaFromRequest('fileIDCardA')->withCustomProperties(['type' => 'idCardA'])->toMediaLibrary('orderClientDocs');
-        }
-
-        if(isset($this->fileIDCardB))
-        {
-            $deliveryOrder->addMediaFromRequest('fileIDCardB')->withCustomProperties(['type' => 'idCardB'])->toMediaLibrary('orderClientDocs');
-        }
+//        if(isset($this->fileIDCardA))
+//        {
+//            $deliveryOrder->addMediaFromRequest('fileIDCardA')->withCustomProperties(['type' => 'idCardA'])->toMediaLibrary('orderClientDocs');
+//        }
+//
+//        if(isset($this->fileIDCardB))
+//        {
+//            $deliveryOrder->addMediaFromRequest('fileIDCardB')->withCustomProperties(['type' => 'idCardB'])->toMediaLibrary('orderClientDocs');
+//        }
 
         return $deliveryOrder;
     }

@@ -10,6 +10,7 @@
             <th>Отчество</th>
             <th>ИИН</th>
             <th>Телефон</th>
+            <th>Статус</th>
         </tr>
         </thead>
         <tbody>
@@ -24,7 +25,7 @@
                     <td>{{ $deliveryOrder->middleName }}</td>
                     <td>{{ $deliveryOrder->iin }}</td>
                     <td>{{ $deliveryOrder->phone }}</td>
-                    {{--<td>{{ \App\Status::code($deliveryCompany->status)->title }}</td>--}}
+                    <td>{{ \App\Status::code($deliveryOrder->status)->title }}</td>
                 </tr>
             @endforeach
         @else
