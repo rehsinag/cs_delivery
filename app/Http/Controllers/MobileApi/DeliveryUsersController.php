@@ -58,6 +58,8 @@ class DeliveryUsersController extends Controller
     public function logout()
     {
         JWTAuth::invalidate(JWTAuth::getToken());
+
+        return response('', 200);
     }
 
     public function changePassword(Request $request)
