@@ -3,10 +3,14 @@
 namespace App\Http\Controllers\Api;
 
 use App\DeliveryOrder;
+use App\DeliveryOrderHistory;
 use App\DeliveryOrderStatus;
+use App\DeliveryUser;
+use App\Status;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Input;
 
 class DeliveryOrdersController extends Controller
@@ -54,11 +58,11 @@ class DeliveryOrdersController extends Controller
 
     public function queueStatusComplete()
     {
-        $orderID = Input::get('id');
+        $orderID = Input::get('requestId');
 
         if($orderID)
         {
-            $order = DeliveryOrder::find($orderID);
+            $order = DeliveryOrder::where('requestId', $orderID)->first();
 
             if($order)
             {
@@ -94,11 +98,11 @@ class DeliveryOrdersController extends Controller
 
     public function getFiles()
     {
-        $orderID = Input::get('id');
+        $orderID = Input::get('requestId');
 
         if($orderID)
         {
-            $order = DeliveryOrder::find($orderID);
+            $order = DeliveryOrder::where('requestId', $orderID)->first();
 
             if($order)
             {
@@ -156,6 +160,179 @@ class DeliveryOrdersController extends Controller
             ]);
         }
 
+    }
+
+    public function answerFile()
+    {
+        $data = Input::all();
+
+        $test_array = array (
+            'RqUID' => rand(1, 99999),
+            'RqTm' => Carbon::now()->toDateTimeString(),
+            'Data' => array (
+                'orderNumber' => $data['requestId'],
+//                'courierComments' => '0',
+                'courierName' => '',
+            ),
+        );
+
+        $order = DeliveryOrder::where('requestId', $data['requestId'])->first();
+
+        $test_array['Data']['deliveryStatus'] = Status::code($order->status)->slug;
+
+        $deliveryUser = DeliveryUser::find($order->deliveryUserId)->first();
+
+        if($deliveryUser)
+        {
+            $test_array['Data']['courierName'] = $deliveryUser->lastName . ' ' . $deliveryUser->firstName . ' ' . $deliveryUser->middleName;
+        }
+
+        if(isset($data['photoSid']) && $data['photoSid'])
+            $test_array['Data']['clientPhotoSid'] = $data['photoSid'];
+
+        if(isset($data['passportSid']) && $data['passportSid'])
+            $test_array['Data']['clientPassportSid'] = $data['passportSid'];
+
+        if(isset($data['otherDocSid']) && $data['otherDocSid'])
+            $test_array['Data']['clientOtherDocSid'] = $data['otherDocSid'];
+
+        $xml = new \SimpleXMLElement('<DeliveryStatus/>');
+        $xml->addAttribute('encoding', 'UTF-8');
+
+        return $this->array_to_xml($test_array, $xml)->asXML();
+    }
+
+    public function bankStatus()
+    {
+        $requestId = Input::get('requestId');
+        $eventId = Input::get('eventId');
+        $comments = Input::get('comments');
+        $status = Input::get('status');
+
+        $deliveryOrder = DeliveryOrder::where('requestId', $requestId)->first();
+
+        if($deliveryOrder && !$eventId)
+        {
+            if($comments)
+                $deliveryOrder->comments = $comments;
+            if($status)
+                $deliveryOrder->springDocStatus = $status;
+
+            $deliveryOrder->save();
+
+            $historyOrder = new DeliveryOrderHistory();
+            $historyOrder->firstName = $deliveryOrder->firstName;
+            $historyOrder->lastName = $deliveryOrder->lastName;
+            $historyOrder->middleName = $deliveryOrder->middleName;
+            $historyOrder->iin = $deliveryOrder->iin;
+            $historyOrder->phone = $deliveryOrder->phone;
+            $historyOrder->requestId = $deliveryOrder->requestId;
+            $historyOrder->productId = $deliveryOrder->productId;
+            $historyOrder->branchId = $deliveryOrder->branchId;
+            $historyOrder->eventId = $deliveryOrder->eventId;
+            $historyOrder->deliveryUserId = $deliveryOrder->deliveryUserId;
+            $historyOrder->city = $deliveryOrder->city;
+            $historyOrder->county = $deliveryOrder->county;
+            $historyOrder->street = $deliveryOrder->street;
+            $historyOrder->house = $deliveryOrder->house;
+            $historyOrder->apartment = $deliveryOrder->apartment;
+            $historyOrder->historyDate = Carbon::now()->toDateString();
+            $historyOrder->deliveryDate = $deliveryOrder->deliveryDate;
+            $historyOrder->statusDate = $deliveryOrder->statusDate;
+            $historyOrder->comments = $deliveryOrder->comments;
+            $historyOrder->status = $deliveryOrder->status;
+            $historyOrder->sicStatus = $deliveryOrder->sicStatus;
+            $historyOrder->springDocStatus = $deliveryOrder->springDocStatus;
+            $historyOrder->save();
+
+            $deliveryOrder->delete();
+
+            return response()->json([
+                'success' => true,
+                'status' => 200,
+                'message' => 'Успешно выполнено'
+            ]);
+        }
+
+        if($deliveryOrder && $eventId)
+        {
+            if($comments)
+                $deliveryOrder->comments = $comments;
+            if($status)
+                $deliveryOrder->springDocStatus = $status;
+
+            $deliveryOrder->save();
+
+//            DB::insert('INSERT INTO deliveryOrdersHistory SELECT * FROM deliveryOrders WHERE requestId = ?', [$requestId]);
+//
+//            $deliveryOrder->delete();
+
+            $historyOrder = new DeliveryOrderHistory();
+            $historyOrder->firstName = $deliveryOrder->firstName;
+            $historyOrder->lastName = $deliveryOrder->lastName;
+            $historyOrder->middleName = $deliveryOrder->middleName;
+            $historyOrder->iin = $deliveryOrder->iin;
+            $historyOrder->phone = $deliveryOrder->phone;
+            $historyOrder->requestId = $deliveryOrder->requestId;
+            $historyOrder->productId = $deliveryOrder->productId;
+            $historyOrder->branchId = $deliveryOrder->branchId;
+            $historyOrder->eventId = $deliveryOrder->eventId;
+            $historyOrder->deliveryUserId = $deliveryOrder->deliveryUserId;
+            $historyOrder->city = $deliveryOrder->city;
+            $historyOrder->county = $deliveryOrder->county;
+            $historyOrder->street = $deliveryOrder->street;
+            $historyOrder->house = $deliveryOrder->house;
+            $historyOrder->apartment = $deliveryOrder->apartment;
+            $historyOrder->historyDate = Carbon::now()->toDateString();
+            $historyOrder->deliveryDate = $deliveryOrder->deliveryDate;
+            $historyOrder->statusDate = $deliveryOrder->statusDate;
+            $historyOrder->comments = $deliveryOrder->comments;
+            $historyOrder->status = $deliveryOrder->status;
+            $historyOrder->sicStatus = $deliveryOrder->sicStatus;
+            $historyOrder->springDocStatus = $deliveryOrder->springDocStatus;
+            $historyOrder->save();
+
+            $deliveryOrder->delete();
+
+            $historyOrder = DeliveryOrderHistory::where('requestId', $requestId)->first();
+//            $historyOrder->historyDate = Carbon::now()->toDateString();
+//            $historyOrder->save();
+//
+//            DB::insert('INSERT INTO deliveryOrders SELECT * FROM deliveryOrdersHistory WHERE requestId = ?', [$requestId]);
+
+            $newDeliveryOrder = new DeliveryOrder();
+            $newDeliveryOrder->firstName = $historyOrder->firstName;
+            $newDeliveryOrder->lastName = $historyOrder->lastName;
+            $newDeliveryOrder->middleName = $historyOrder->middleName;
+            $newDeliveryOrder->iin = $historyOrder->iin;
+            $newDeliveryOrder->phone = $historyOrder->phone;
+            $newDeliveryOrder->requestId = $historyOrder->requestId;
+            $newDeliveryOrder->productId = $historyOrder->productId;
+            $newDeliveryOrder->branchId = $historyOrder->branchId;
+            $newDeliveryOrder->city = $historyOrder->city;
+            $newDeliveryOrder->county = $historyOrder->county;
+            $newDeliveryOrder->street = $historyOrder->street;
+            $newDeliveryOrder->house = $historyOrder->house;
+            $newDeliveryOrder->apartment = $historyOrder->apartment;
+            $newDeliveryOrder->deliveryDate = $historyOrder->deliveryDate;
+            $newDeliveryOrder->comments = $historyOrder->comments;
+
+//            $newDeliveryOrder = DeliveryOrder::where('requestId', $requestId)->first();
+            $newDeliveryOrder->eventId = $eventId;
+            $newDeliveryOrder->status = Status::REAPPLICATION;
+            $newDeliveryOrder->springDocStatus = null;
+            $newDeliveryOrder->sicStatus = 'N';
+            $newDeliveryOrder->statusDate = null;
+            $newDeliveryOrder->created_at = Carbon::now()->format('Y-m-d H:i:s');
+            $newDeliveryOrder->updated_at = Carbon::now()->format('Y-m-d H:i:s');
+            $newDeliveryOrder->save();
+
+            return response()->json([
+                'success' => true,
+                'status' => 200,
+                'message' => 'Успешно выполнено'
+            ]);
+        }
     }
 
     public function submitForm()
@@ -411,6 +588,17 @@ class DeliveryOrdersController extends Controller
                 'message' => 'Не передан идентификатор заявки.'
             ]);
         }
+    }
+
+
+    function array_to_xml(array $arr, \SimpleXMLElement $xml)
+    {
+        foreach ($arr as $k => $v) {
+            is_array($v)
+                ? $this->array_to_xml($v, $xml->addChild($k))
+                : $xml->addChild($k, $v);
+        }
+        return $xml;
     }
 
 

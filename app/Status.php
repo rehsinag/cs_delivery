@@ -18,38 +18,47 @@ class Status
         self::ACTIVE => [
             'code' => self::ACTIVE,
             'title'=>'Активный',
+            'slug' => 'ACTIVE',
         ],
         self::INACTIVE => [
             'code' => self::INACTIVE,
             'title'=>'Неактивный',
+            'slug' => 'INACTIVE',
         ],
         self::DELETED => [
             'code' => self::DELETED,
             'title'=>'Удаленный',
+            'slug' => 'DELETED',
         ],
         self::DELIVERED => [
             'code' => self::DELIVERED,
             'title'=>'Доставлен',
+            'slug' => 'DELIVERED',
         ],
         self::REJECT_PRODUCT => [
             'code' => self::REJECT_PRODUCT,
             'title'=>'Отказ от продукта',
+            'slug' => 'REJECT_PRODUCT',
         ],
         self::REJECT_DELIVERY => [
             'code' => self::REJECT_DELIVERY,
             'title'=>'Отказ от доставки',
+            'slug' => 'REJECT_DELIVERY',
         ],
         self::PROCESS => [
             'code' => self::PROCESS,
             'title'=>'В процессе доставки',
+            'slug' => 'PROCESS',
         ],
         self::DOSSIER_TAKEN => [
             'code' => self::DOSSIER_TAKEN,
             'title'=>'Досье принято',
+            'slug' => 'DOSSIER_TAKEN',
         ],
         self::REAPPLICATION => [
             'code' => self::REAPPLICATION,
             'title'=>'Повторная заявка',
+            'slug' => 'REAPPLICATION',
         ],
     ];
 
@@ -61,6 +70,7 @@ class Status
             $tmp = new self();
             $tmp->code = $code;
             $tmp->title = self::$arr[$code]['title'];
+            $tmp->slug = self::$arr[$code]['slug'];
         }
 
         return $tmp;

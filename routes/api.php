@@ -17,8 +17,9 @@ use Illuminate\Http\Request;
 Route::prefix('/deliveryOrders')->group(function (){
     Route::post('/create', 'Api\DeliveryOrdersController@create');
     Route::post('/queueStatusComplete', 'Api\DeliveryOrdersController@queueStatusComplete');
-    Route::get('/files', 'Api\DeliveryOrdersController@getFiles');
+    Route::post('/files', 'Api\DeliveryOrdersController@getFiles');
     Route::post('/answerFile', 'Api\DeliveryOrdersController@answerFile');
+    Route::post('/bankStatus', 'Api\DeliveryOrdersController@bankStatus');
 });
 // API для СИК --конец
 
