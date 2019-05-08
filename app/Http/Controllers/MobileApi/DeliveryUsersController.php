@@ -70,7 +70,7 @@ class DeliveryUsersController extends Controller
         try {
 
             if (!$user = JWTAuth::parseToken()->authenticate()) {
-                return response()->json(['user_not_found'], 404);
+                return response()->json(['user_not_found'], 404)->setStatusCode(401);
             }
 
         } catch (Tymon\JWTAuth\Exceptions\TokenExpiredException $e) {
@@ -91,35 +91,35 @@ class DeliveryUsersController extends Controller
             return response()->json([
                 'error_code' => '-106',
                 'error_message' => 'Старый пароль пустой.'
-            ]);
+            ])->setStatusCode(411);
         }
         if(!$newPassword)
         {
             return response()->json([
                 'error_code' => '-106',
                 'error_message' => 'Пароль должен быть больше 8 символов'
-            ]);
+            ])->setStatusCode(411);
         }
         if($newPassword && strlen($newPassword) < 8)
         {
             return response()->json([
                 'error_code' => '-106',
                 'error_message' => 'Пароль должен быть больше 8 символов'
-            ]);
+            ])->setStatusCode(411);
         }
         if($newPassword != $confirmPassword)
         {
             return response()->json([
                 'error_code' => '-107',
                 'error_message' => 'Подтверждение пароля не совпадает'
-            ]);
+            ])->setStatusCode(412);
         }
         if(!password_verify($oldPassword, $user->password))
         {
             return response()->json([
                 'error_code' => '-108',
                 'error_message' => 'Не прошла валидация старого пароля'
-            ]);
+            ])->setStatusCode(412);
         }
 
         $user->password = bcrypt($newPassword);
@@ -127,7 +127,7 @@ class DeliveryUsersController extends Controller
         {
             return response()->json([
                 'message' => 'Пароль успешно изменен',
-            ]);
+            ])->setStatusCode(200);
         }
     }
 }
