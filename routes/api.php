@@ -13,15 +13,20 @@ use Illuminate\Http\Request;
 |
 */
 
-// API для СИК --начало
-Route::prefix('/deliveryOrders')->group(function (){
-    Route::post('/create', 'Api\DeliveryOrdersController@create');
-    Route::post('/queueStatusComplete', 'Api\DeliveryOrdersController@queueStatusComplete');
-    Route::post('/files', 'Api\DeliveryOrdersController@getFiles');
-    Route::post('/answerFile', 'Api\DeliveryOrdersController@answerFile');
-    Route::post('/bankStatus', 'Api\DeliveryOrdersController@bankStatus');
+Route::group(['middleware' => ['sic']], function () {
+    Route::get('/test', 'Api\TestController@index');
+
+    // API для СИК --начало
+    Route::prefix('/deliveryOrders')->group(function (){
+        Route::post('/create', 'Api\DeliveryOrdersController@create');
+        Route::post('/queueStatusComplete', 'Api\DeliveryOrdersController@queueStatusComplete');
+        Route::post('/files', 'Api\DeliveryOrdersController@getFiles');
+        Route::post('/answerFile', 'Api\DeliveryOrdersController@answerFile');
+        Route::post('/bankStatus', 'Api\DeliveryOrdersController@bankStatus');
+    });
+    // API для СИК --конец
 });
-// API для СИК --конец
+
 
 //Route::middleware('auth:api')->get('/user', function (Request $request) {
 //    return $request->user();
