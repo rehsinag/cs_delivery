@@ -11,6 +11,9 @@ class Status
     const REJECT_PRODUCT    = 11;
     const REJECT_DELIVERY   = 12;
     const PROCESS           = 13;
+    const REJECT_VISUAL     = 14;
+    const NOT_DIAL          = 15;
+    const DEFERRED          = 16;
     const DOSSIER_TAKEN     = 30;
     const REAPPLICATION     = 50;
 
@@ -49,6 +52,21 @@ class Status
             'code' => self::PROCESS,
             'title'=>'В процессе доставки',
             'slug' => 'PROCESS',
+        ],
+        self::REJECT_VISUAL => [
+            'code' => self::REJECT_VISUAL,
+            'title'=>'Отказано по визуальной оценке',
+            'slug' => 'REJECT_VISUAL',
+        ],
+        self::NOT_DIAL => [
+            'code' => self::NOT_DIAL,
+            'title'=>'Недозвон',
+            'slug' => 'NOT_DIAL',
+        ],
+        self::DEFERRED => [
+            'code' => self::DEFERRED,
+            'title'=>'Отложенный',
+            'slug' => 'DEFERRED',
         ],
         self::DOSSIER_TAKEN => [
             'code' => self::DOSSIER_TAKEN,

@@ -30,6 +30,21 @@ class DeliveryOrdersController extends Controller
                 case 'DELIVERED':
                     $statusCode = Status::DELIVERED;
                     break;
+                case 'REJECT_PRODUCT':
+                    $statusCode = Status::REJECT_PRODUCT;
+                    break;
+                case 'REJECT_DELIVERY':
+                    $statusCode = Status::REJECT_DELIVERY;
+                    break;
+                case 'REJECT_VISUAL':
+                    $statusCode = Status::REJECT_VISUAL;
+                    break;
+                case 'NOT_DIAL':
+                    $statusCode = Status::NOT_DIAL;
+                    break;
+                case 'DEFERRED':
+                    $statusCode = Status::DEFERRED;
+                    break;
                 default:
                     break;
             }
@@ -297,6 +312,21 @@ class DeliveryOrdersController extends Controller
                         break;
                     case 'DELIVERED':
                         $statusCode = Status::DELIVERED;
+                        break;
+                    case 'REJECT_PRODUCT':
+                        $statusCode = Status::REJECT_PRODUCT;
+                        break;
+                    case 'REJECT_DELIVERY':
+                        $statusCode = Status::REJECT_DELIVERY;
+                        break;
+                    case 'REJECT_VISUAL':
+                        $statusCode = Status::REJECT_VISUAL;
+                        break;
+                    case 'NOT_DIAL':
+                        $statusCode = Status::NOT_DIAL;
+                        break;
+                    case 'DEFERRED':
+                        $statusCode = Status::DEFERRED;
                         break;
                     default:
                         break;
