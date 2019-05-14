@@ -26,6 +26,8 @@ Route::prefix('/orders')->group(function (){
     Route::put('/address', 'MobileApi\DeliveryOrdersController@address');
     Route::get('/comments', 'MobileApi\DeliveryOrdersController@comments');
     Route::post('/comment', 'MobileApi\DeliveryOrdersController@comment');
+
+    Route::post('/status', 'MobileApi\DeliveryOrdersController@status');
 });
 
 //Route::middleware('auth:api')->get('/user', function (Request $request) {

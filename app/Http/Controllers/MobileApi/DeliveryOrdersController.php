@@ -275,4 +275,54 @@ class DeliveryOrdersController extends Controller
             ])->setStatusCode(401);
         }
     }
+
+    public function status()
+    {
+        $requestId = Input::get('request_id');
+        $status = Input::get('status');
+
+        if($requestId)
+        {
+            $deliveryOrder = DeliveryOrder::getCollection(['requestIdIn' => $requestId])->first();
+
+            if($deliveryOrder)
+            {
+                $statusCode = 0;
+                switch ($status)
+                {
+                    case 'PROCESS':
+                        $statusCode = Status::PROCESS;
+                        break;
+                    case 'DELIVERED':
+                        $statusCode = Status::DELIVERED;
+                        break;
+                    default:
+                        break;
+                }
+
+                $deliveryOrder->status = $statusCode;
+
+                if($deliveryOrder->save())
+                {
+                    return response()->json([
+                        'item_key' => 500
+                    ])->setStatusCode(200);
+                }
+            }
+            else
+            {
+                return response()->json([
+                    'error_code' => '-109',
+                    'error_message' => 'Не найдена заявка с таким номером'
+                ])->setStatusCode(503);
+            }
+        }
+        else
+        {
+            return response()->json([
+                'error_code' => '-109',
+                'error_message' => 'Не найдена заявка с таким номером'
+            ])->setStatusCode(503);
+        }
+    }
 }
