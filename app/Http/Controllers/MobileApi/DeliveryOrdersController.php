@@ -186,7 +186,7 @@ class DeliveryOrdersController extends Controller
         if($requestId)
         {
             $deliveryUserComments = DeliveryUserComment::getCollection(['requestIdIn' => $requestId, 'orderBy' => 'created_at'])->get();
-
+var_dump($deliveryUserComments);
             if(count($deliveryUserComments))
             {
                 $output = [];
