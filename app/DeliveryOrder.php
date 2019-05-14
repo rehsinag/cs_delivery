@@ -27,6 +27,20 @@ class DeliveryOrder extends Model implements HasMedia
         if(isset($params['new']) && $params['new'])
             $ret->new();
 
+        if(isset($params['requestIdIn']) && count($params['requestIdIn']))
+        {
+            if(gettype($params['requestIdIn']) == 'string')
+                $params['requestIdIn'] = explode(',',trim($params['requestIdIn']));
+
+            if(count($params['requestIdIn']) == 1)
+                $ret->where('requestId', $params['requestIdIn'][0]);
+            else
+                $ret->whereIn('requestId', $params['requestIdIn']);
+        }
+
+        if(isset($params['status']) && $params['status'])
+            $ret->where('status', $params['status']);
+
         return $ret;
     }
 
@@ -38,6 +52,11 @@ class DeliveryOrder extends Model implements HasMedia
     public function initCounty()
     {
         $this->countyObj = CountyCatalog::find($this->county);
+    }
+
+    public function initProduct()
+    {
+        $this->productObj = Product::find($this->productId);
     }
 
     public function setDataFromArray($data)

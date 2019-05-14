@@ -19,6 +19,15 @@ Route::prefix('/auth')->group(function (){
     Route::post('/changePassword', 'MobileApi\DeliveryUsersController@changePassword');
 });
 
+Route::prefix('/orders')->group(function (){
+    Route::get('/list', 'MobileApi\DeliveryOrdersController@list1');
+    Route::get('/item', 'MobileApi\DeliveryOrdersController@item');
+
+    Route::put('/address', 'MobileApi\DeliveryOrdersController@address');
+    Route::get('/comments', 'MobileApi\DeliveryOrdersController@comments');
+    Route::post('/comment', 'MobileApi\DeliveryOrdersController@comment');
+});
+
 //Route::middleware('auth:api')->get('/user', function (Request $request) {
 //    return $request->user();
 //});
