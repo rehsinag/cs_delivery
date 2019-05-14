@@ -32,6 +32,10 @@ Route::prefix('/orders')->group(function (){
     Route::get('/counties', 'MobileApi\DeliveryOrdersController@counties');
 });
 
+Route::prefix('/files')->group(function (){
+    Route::post('/upload', 'MobileApi\FilesController@upload');
+});
+
 //Route::middleware('auth:api')->get('/user', function (Request $request) {
 //    return $request->user();
 //});
