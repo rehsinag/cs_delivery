@@ -158,8 +158,8 @@ class DeliveryOrder extends Model implements HasMedia
         if(!$this->house || $this->house == null)
             $errors[] = 'Необходимо указать Дом!';
 
-        if(!$this->apartment || $this->apartment == null)
-            $errors[] = 'Необходимо указать Квартиру!';
+//        if(!$this->apartment || $this->apartment == null)
+//            $errors[] = 'Необходимо указать Квартиру!';
 
 
         if(!$this->deliveryDate || $this->deliveryDate == null)
