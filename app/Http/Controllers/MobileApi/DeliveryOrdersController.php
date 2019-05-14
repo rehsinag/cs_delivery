@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\MobileApi;
 
+use App\CityCatalog;
+use App\CountyCatalog;
 use App\DeliveryOrder;
 use App\DeliveryUserComment;
 use App\Status;
@@ -323,6 +325,47 @@ class DeliveryOrdersController extends Controller
                 'error_code' => '-109',
                 'error_message' => 'Не найдена заявка с таким номером'
             ])->setStatusCode(503);
+        }
+    }
+
+    public function counties()
+    {
+        $cityCode = Input::get('city_code');
+
+        if($cityCode)
+        {
+            $city = CityCatalog::where('code', $cityCode)->first();
+
+            if($city)
+            {
+                $counties = CountyCatalog::where('cityId', $city->id)->get();
+                if(count($counties))
+                {
+                    $data = [];
+
+                    foreach ($counties as $county)
+                    {
+                        $data[] = [
+                            'code' => $county->code,
+                            'name' => $county->displayName
+                        ];
+                    }
+
+                    return response()->json($data)->setStatusCode(200);
+                }
+                else
+                {
+                    return '[]';
+                }
+            }
+            else
+            {
+                return '[]';
+            }
+        }
+        else
+        {
+            return '[]';
         }
     }
 }

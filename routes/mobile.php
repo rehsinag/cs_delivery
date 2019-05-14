@@ -28,6 +28,8 @@ Route::prefix('/orders')->group(function (){
     Route::post('/comment', 'MobileApi\DeliveryOrdersController@comment');
 
     Route::post('/status', 'MobileApi\DeliveryOrdersController@status');
+
+    Route::get('/counties', 'MobileApi\DeliveryOrdersController@counties');
 });
 
 //Route::middleware('auth:api')->get('/user', function (Request $request) {
