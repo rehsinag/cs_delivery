@@ -43,16 +43,16 @@ class DeliveryOrdersController extends Controller
                     'success' => true,
                     'status' => 200,
                     'message' => 'Заявка была успешно добавлена.'
-                ]);
+                ], 200);
             }
         }
         else
         {
             return response()->json([
                 'success' => false,
-                'status' => 500,
+                'status' => 400,
                 'message' => $errors[0]
-            ]);
+            ], 400, ['Content-Type' => 'application/json;charset=UTF-8', 'Charset' => 'utf-8'], JSON_UNESCAPED_UNICODE);
         }
     }
 
@@ -74,25 +74,25 @@ class DeliveryOrdersController extends Controller
                         'success' => false,
                         'status' => 200,
                         'message' => 'Статус SIC был успешно изменен.'
-                    ]);
+                    ], 200);
                 }
             }
             else
             {
                 return response()->json([
                     'success' => false,
-                    'status' => 500,
+                    'status' => 400,
                     'message' => 'Не найдена заявка с указанным идентификатором.'
-                ]);
+                ], 400, ['Content-Type' => 'application/json;charset=UTF-8', 'Charset' => 'utf-8'], JSON_UNESCAPED_UNICODE);
             }
         }
         else
         {
             return response()->json([
                 'success' => false,
-                'status' => 500,
+                'status' => 400,
                 'message' => 'Не передан идентификатор заявки.'
-            ]);
+            ], 400, ['Content-Type' => 'application/json;charset=UTF-8', 'Charset' => 'utf-8'], JSON_UNESCAPED_UNICODE);
         }
     }
 
@@ -131,33 +131,33 @@ class DeliveryOrdersController extends Controller
                         'message' => [
                             'files' => $output
                         ]
-                    ]);
+                    ], 200);
                 }
                 else
                 {
                     return response()->json([
                         'success' => false,
-                        'status' => 500,
+                        'status' => 400,
                         'message' => 'Не найдены файлы заявки.'
-                    ]);
+                    ], 400, ['Content-Type' => 'application/json;charset=UTF-8', 'Charset' => 'utf-8'], JSON_UNESCAPED_UNICODE);
                 }
             }
             else
             {
                 return response()->json([
                     'success' => false,
-                    'status' => 500,
+                    'status' => 400,
                     'message' => 'Не найдена заявка с указанным идентификатором.'
-                ]);
+                ], 400, ['Content-Type' => 'application/json;charset=UTF-8', 'Charset' => 'utf-8'], JSON_UNESCAPED_UNICODE);
             }
         }
         else
         {
             return response()->json([
                 'success' => false,
-                'status' => 500,
+                'status' => 400,
                 'message' => 'Не передан идентификатор заявки.'
-            ]);
+            ], 400, ['Content-Type' => 'application/json;charset=UTF-8', 'Charset' => 'utf-8'], JSON_UNESCAPED_UNICODE);
         }
 
     }
@@ -251,7 +251,7 @@ class DeliveryOrdersController extends Controller
                 'success' => true,
                 'status' => 200,
                 'message' => 'Успешно выполнено'
-            ]);
+            ], 200);
         }
 
         if($deliveryOrder && $eventId)
@@ -331,7 +331,7 @@ class DeliveryOrdersController extends Controller
                 'success' => true,
                 'status' => 200,
                 'message' => 'Успешно выполнено'
-            ]);
+            ], 200);
         }
     }
 
@@ -485,25 +485,25 @@ class DeliveryOrdersController extends Controller
                         'success' => false,
                         'status' => 200,
                         'message' => 'Файлы были успешно загружены.'
-                    ]);
+                    ], 200);
                 }
             }
             else
             {
                 return response()->json([
                     'success' => false,
-                    'status' => 500,
+                    'status' => 400,
                     'message' => 'Не найдена заявка с указанным идентификатором.'
-                ]);
+                ], 400, ['Content-Type' => 'application/json;charset=UTF-8', 'Charset' => 'utf-8'], JSON_UNESCAPED_UNICODE);
             }
         }
         else
         {
             return response()->json([
                 'success' => false,
-                'status' => 500,
+                'status' => 400,
                 'message' => 'Не передан идентификатор заявки.'
-            ]);
+            ], 400, ['Content-Type' => 'application/json;charset=UTF-8', 'Charset' => 'utf-8'], JSON_UNESCAPED_UNICODE);
         }
     }
 
@@ -526,25 +526,25 @@ class DeliveryOrdersController extends Controller
                         'success' => true,
                         'status' => 200,
                         'message' => 'Комментарий были успешно добавлены.'
-                    ]);
+                    ], 200);
                 }
             }
             else
             {
                 return response()->json([
                     'success' => false,
-                    'status' => 500,
+                    'status' => 400,
                     'message' => 'Не найдена заявка с указанным идентификатором.'
-                ]);
+                ], 400, ['Content-Type' => 'application/json;charset=UTF-8', 'Charset' => 'utf-8'], JSON_UNESCAPED_UNICODE);
             }
         }
         else
         {
             return response()->json([
                 'success' => false,
-                'status' => 500,
+                'status' => 400,
                 'message' => 'Не передан идентификатор заявки.'
-            ]);
+            ], 400, ['Content-Type' => 'application/json;charset=UTF-8', 'Charset' => 'utf-8'], JSON_UNESCAPED_UNICODE);
         }
     }
 
@@ -568,25 +568,25 @@ class DeliveryOrdersController extends Controller
                         'success' => true,
                         'status' => 200,
                         'message' => 'Статус был успешно изменен.'
-                    ]);
+                    ], 200);
                 }
             }
             else
             {
                 return response()->json([
                     'success' => false,
-                    'status' => 500,
+                    'status' => 400,
                     'message' => 'Не найдена заявка с указанным идентификатором.'
-                ]);
+                ], 400, ['Content-Type' => 'application/json;charset=UTF-8', 'Charset' => 'utf-8'], JSON_UNESCAPED_UNICODE);
             }
         }
         else
         {
             return response()->json([
                 'success' => false,
-                'status' => 500,
+                'status' => 400,
                 'message' => 'Не передан идентификатор заявки.'
-            ]);
+            ], 400, ['Content-Type' => 'application/json;charset=UTF-8', 'Charset' => 'utf-8'], JSON_UNESCAPED_UNICODE);
         }
     }
 
