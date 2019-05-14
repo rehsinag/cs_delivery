@@ -265,8 +265,11 @@ class CatalogsController extends Controller
             $county = CountyCatalog::find($countyId);
         }
 
+        $cities = CityCatalog::getCollection(['actual' => 1])->get();
+
         return view('catalogs.counties.edit', [
             'county' => $county,
+            'cities' => $cities
         ]);
     }
 

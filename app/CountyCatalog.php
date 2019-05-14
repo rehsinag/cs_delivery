@@ -50,6 +50,9 @@ class CountyCatalog extends Model
 
         if(isset($data['status']) && trim($data['status']))
             $this->status = trim($data['status']);
+
+        if(isset($data['city']) && trim($data['city']))
+            $this->city = trim($data['city']);
     }
 
     public function validateData()
@@ -61,6 +64,9 @@ class CountyCatalog extends Model
 
         if(!$this->displayName || $this->displayName == null)
             $errors[] = 'Необходимо указать Отображаемое название района!';
+
+        if(!$this->city || $this->city == null)
+            $errors[] = 'Необходимо выбрать Город района!';
 
         return $errors;
     }
@@ -78,6 +84,7 @@ class CountyCatalog extends Model
         $county->code           = $this->code;
         $county->displayName    = $this->displayName;
         $county->status         = $this->status;
+        $county->cityId         = $this->city;
 
         $county->save();
 

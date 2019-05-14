@@ -14,6 +14,20 @@
         </div>
     </div>
     <div class="form-group row">
+        <label for="city" class="col-sm-3 col-form-label">Город</label>
+        <div class="col-sm-9">
+            @if(count($cities))
+            <select name="city" id="city" class="form-control">
+                @foreach($cities as $city)
+                <option value="{{ $city->id }}" @if( $county->cityId == $city->id) selected="selected" @endif>{{ $city->displayName }}</option>
+                @endforeach
+            </select>
+            @else
+                Необходиом добавить город!
+            @endif
+        </div>
+    </div>
+    <div class="form-group row">
         <label for="status" class="col-sm-3 col-form-label">Статус</label>
         <div class="col-sm-9">
             <select name="status" id="status" class="form-control">
