@@ -14,7 +14,7 @@ class FilesController extends Controller
     {
         $data = Input::all();
         file_put_contents('test111.txt', print_r($data, true), FILE_APPEND);
-        $requestID = Input::get('reqId');
+        $requestID = Input::get('pReqId');
         $data = Input::all();
 
         if($requestID)
