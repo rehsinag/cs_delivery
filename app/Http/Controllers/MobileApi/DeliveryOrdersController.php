@@ -124,7 +124,7 @@ class DeliveryOrdersController extends Controller
                     'product_type' => $deliveryOrder->productObj->code,
                     'product_name' => $deliveryOrder->productObj->displayName,
                     'status' => Status::code($deliveryOrder->status)->slug,
-                    'sid' => '',
+                    'sid' => [],
                     'delivery_date' => '',
                     'manager_comment' => ($deliveryOrder->comments) ? $deliveryOrder->comments : "",
                     'check_visual' => '',
