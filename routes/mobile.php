@@ -15,26 +15,31 @@ use Illuminate\Http\Request;
 
 Route::prefix('/auth')->group(function (){
     Route::post('/login', 'MobileApi\DeliveryUsersController@login');
-    Route::post('/logout', 'MobileApi\DeliveryUsersController@logout');
-    Route::post('/changePassword', 'MobileApi\DeliveryUsersController@changePassword');
+
+    Route::group(['middleware' => ['jwt.auth']], function () {
+        Route::post('/logout', 'MobileApi\DeliveryUsersController@logout');
+        Route::post('/changePassword', 'MobileApi\DeliveryUsersController@changePassword');
+    });
 });
 
-Route::prefix('/orders')->group(function (){
-    Route::get('/list', 'MobileApi\DeliveryOrdersController@list1');
-    Route::get('/item', 'MobileApi\DeliveryOrdersController@item');
+Route::group(['middleware' => ['jwt.auth']], function () {
+    Route::prefix('/orders')->group(function (){
+        Route::get('/list', 'MobileApi\DeliveryOrdersController@list1');
+        Route::get('/item', 'MobileApi\DeliveryOrdersController@item');
 
-    Route::put('/address', 'MobileApi\DeliveryOrdersController@address');
-    Route::get('/comments', 'MobileApi\DeliveryOrdersController@comments');
-    Route::post('/comment', 'MobileApi\DeliveryOrdersController@comment');
+        Route::put('/address', 'MobileApi\DeliveryOrdersController@address');
+        Route::get('/comments', 'MobileApi\DeliveryOrdersController@comments');
+        Route::post('/comment', 'MobileApi\DeliveryOrdersController@comment');
 
-    Route::post('/status', 'MobileApi\DeliveryOrdersController@status');
+        Route::post('/status', 'MobileApi\DeliveryOrdersController@status');
 
-    Route::get('/counties', 'MobileApi\DeliveryOrdersController@counties');
-});
+        Route::get('/counties', 'MobileApi\DeliveryOrdersController@counties');
+    });
 
-Route::prefix('/files')->group(function (){
-    Route::post('/upload', 'MobileApi\FilesController@upload');
-    Route::get('/download/{fileId}', 'MobileApi\FilesController@download');
+    Route::prefix('/files')->group(function (){
+        Route::post('/upload', 'MobileApi\FilesController@upload');
+        Route::get('/download/{fileId}', 'MobileApi\FilesController@download');
+    });
 });
 
 //Route::middleware('auth:api')->get('/user', function (Request $request) {

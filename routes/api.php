@@ -27,11 +27,12 @@ Route::group(['middleware' => ['sic']], function () {
     // API для СИК --конец
 });
 
-Route::prefix('/files')->group(function (){
-    Route::post('/upload', 'MobileApi\FilesController@upload');
-    Route::get('/download/{fileId}', 'MobileApi\FilesController@download');
+Route::group(['middleware' => ['jwt.auth']], function () {
+    Route::prefix('/files')->group(function (){
+        Route::post('/upload', 'MobileApi\FilesController@upload');
+        Route::get('/download/{fileId}', 'MobileApi\FilesController@download');
+    });
 });
-
 
 //Route::middleware('auth:api')->get('/user', function (Request $request) {
 //    return $request->user();
