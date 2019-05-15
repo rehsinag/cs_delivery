@@ -68,6 +68,11 @@ return [
             'root' => public_path('media')
         ],
 
+        'clientDocs' => [
+            'driver' => 'local',
+            'root' => storage_path('clientDocs')
+        ],
+
     ],
 
 ];
