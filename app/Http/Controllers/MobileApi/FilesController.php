@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Mail;
+use Spatie\MediaLibrary\Media;
 
 class FilesController extends Controller
 {
@@ -106,5 +107,20 @@ class FilesController extends Controller
         $data = Input::all();
         file_put_contents('test111.txt', print_r($data, true), FILE_APPEND);
         var_dump(Input::all());
+    }
+
+    public function download($fileId)
+    {
+        if($fileId)
+        {
+            $file = Media::find($fileId);
+            if($file)
+            {
+                $path = public_path($file->getUrl());
+//                $type = pathinfo($path, PATHINFO_EXTENSION);
+                $data = file_get_contents($path);
+                return $data;
+            }
+        }
     }
 }

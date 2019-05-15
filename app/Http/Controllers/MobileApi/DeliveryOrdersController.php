@@ -61,6 +61,17 @@ class DeliveryOrdersController extends Controller
                     $deliveryOrder->initCity();
                     $deliveryOrder->initCounty();
 
+                    $sid = [];
+                    $files = $deliveryOrder->getMedia('orderClientDocs');
+                    if(count($files))
+                    {
+                        foreach ($files as $file)
+                        {
+                            $sid[] = $file->id;
+                        }
+                    }
+
+//var_dump($files);
                     $data[] = [
                         'id' => $deliveryOrder->id,
                         'insert_date' => Carbon::parse($deliveryOrder->created_at)->format('d.m.Y H:i'),
@@ -81,7 +92,7 @@ class DeliveryOrdersController extends Controller
                         'product_type' => 'DEBET_CARD',
                         'product_name' => $deliveryOrder->productObj->displayName,
                         'status' => Status::code($deliveryOrder->status)->slug,
-                        'sid' => [],
+                        'sid' => $sid,
                         'delivery_date' => '',
                         'manager_comment' => ($deliveryOrder->comments) ? $deliveryOrder->comments : "",
                         'check_visual' => '',
@@ -119,6 +130,16 @@ class DeliveryOrdersController extends Controller
                 $deliveryOrder->initCity();
                 $deliveryOrder->initCounty();
 
+                $sid = [];
+                $files = $deliveryOrder->getMedia('orderClientDocs');
+                if(count($files))
+                {
+                    foreach ($files as $file)
+                    {
+                        $sid[] = $file->id;
+                    }
+                }
+
                 return response()->json([
                     'id' => $deliveryOrder->id,
                     'insert_date' => Carbon::parse($deliveryOrder->created_at)->format('d.m.Y H:i'),
@@ -139,7 +160,7 @@ class DeliveryOrdersController extends Controller
                     'product_type' => 'DEBET_CARD',
                     'product_name' => $deliveryOrder->productObj->displayName,
                     'status' => Status::code($deliveryOrder->status)->slug,
-                    'sid' => [],
+                    'sid' => $sid,
                     'delivery_date' => '',
                     'manager_comment' => ($deliveryOrder->comments) ? $deliveryOrder->comments : "",
                     'check_visual' => '',
