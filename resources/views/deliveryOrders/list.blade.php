@@ -11,6 +11,7 @@
             <th>ИИН</th>
             <th>Телефон</th>
             <th>Статус</th>
+            <th>Файл</th>
         </tr>
         </thead>
         <tbody>
@@ -26,6 +27,19 @@
                     <td>{{ $deliveryOrder->iin }}</td>
                     <td>{{ $deliveryOrder->phone }}</td>
                     <td>{{ \App\Status::code($deliveryOrder->status)->title }}</td>
+                    <td>
+                        @if(count($deliveryOrder->getMedia('orderClientDocs')))
+                            <ul>
+                                @foreach($deliveryOrder->getMedia('orderClientDocs') as $media)
+                                    <li>
+                                        <a href="{{ route('deliveryOrders.file', $media->id) }}" target="_blank">
+                                            {{ $media->file_name }}
+                                        </a>
+                                    </li>
+                                @endforeach
+                            </ul>
+                        @endif
+                    </td>
                 </tr>
             @endforeach
         @else

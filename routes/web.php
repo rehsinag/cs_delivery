@@ -100,6 +100,8 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/edit', 'Web\DeliveryOrdersController@editForm')->name('deliveryOrders.edit');
         Route::post('/submit', 'Web\DeliveryOrdersController@submitForm')->name('deliveryOrders.submit');
         Route::post('/delete', 'Web\DeliveryOrdersController@delete')->name('deliveryOrders.delete');
+
+        Route::get('/file/{fileId}', 'Web\DeliveryOrdersController@file')->name('deliveryOrders.file');
     });
     // ЗАЯВКИ --конец
 

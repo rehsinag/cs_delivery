@@ -12,6 +12,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Input;
+use Spatie\MediaLibrary\Media;
 
 class DeliveryOrdersController extends Controller
 {
@@ -197,6 +198,16 @@ class DeliveryOrdersController extends Controller
                 'success' => true,
                 'message' => $successMessage
             ]);
+        }
+    }
+
+    public function file($fileId)
+    {
+        if($fileId)
+        {
+            $file = Media::find($fileId);
+            $path = storage_path('media/' . $fileId . '/' . $file->file_name);
+            return response()->file($path);
         }
     }
 }
