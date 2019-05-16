@@ -113,7 +113,8 @@ class DeliveryOrdersController extends Controller
                     $output = [];
                     foreach ($files as $file)
                     {
-                        $path = public_path($file->getUrl());
+//                        $path = public_path($file->getUrl());
+                        $path = storage_path('clientDocs/' . $file->id . '/' . $file->file_name);
                         $type = pathinfo($path, PATHINFO_EXTENSION);
                         $data = file_get_contents($path);
                         $base64 = 'data:application/' . $type . ';base64,' . base64_encode($data);
