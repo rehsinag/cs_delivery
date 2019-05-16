@@ -71,7 +71,7 @@ class DeliveryOrdersController extends Controller
                 if($order->save())
                 {
                     return response()->json([
-                        'success' => false,
+                        'success' => true,
                         'status' => 200,
                         'message' => 'Статус SIC был успешно изменен.'
                     ], 200);
