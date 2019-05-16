@@ -143,8 +143,8 @@ class DeliveryOrder extends Model implements HasMedia
         if(!$this->branchId || $this->branchId == null)
             $errors[] = 'Необходимо указать Филиал!';
 
-        if(!$this->eventId || $this->eventId == null)
-            $errors[] = 'Необходимо указать event_id!';
+//        if(!$this->eventId || $this->eventId == null)
+//            $errors[] = 'Необходимо указать event_id!';
 
         if(!$this->city || $this->city == null)
             $errors[] = 'Необходимо указать Город!';
