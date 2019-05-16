@@ -117,7 +117,8 @@ class DeliveryOrdersController extends Controller
                         $path = storage_path('clientDocs/' . $file->id . '/' . $file->file_name);
                         $type = pathinfo($path, PATHINFO_EXTENSION);
                         $data = file_get_contents($path);
-                        $base64 = 'data:application/' . $type . ';base64,' . base64_encode($data);
+//                        $base64 = 'data:application/' . $type . ';base64,' . base64_encode($data);
+                        $base64 = base64_encode($data);
                         $output[] = [
                             'type' => $file->getCustomProperty('type'),
                             'filename' => $file->file_name,
