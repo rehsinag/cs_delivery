@@ -22,24 +22,42 @@ Route::prefix('/auth')->group(function (){
     });
 });
 
-Route::group(['middleware' => ['jwt.auth']], function () {
-    Route::prefix('/orders')->group(function (){
-        Route::get('/list', 'MobileApi\DeliveryOrdersController@list1');
-        Route::get('/item', 'MobileApi\DeliveryOrdersController@item');
+//Route::group(['middleware' => ['jwt.auth']], function () {
+//    Route::prefix('/orders')->group(function (){
+//        Route::get('/list', 'MobileApi\DeliveryOrdersController@list1');
+//        Route::get('/item', 'MobileApi\DeliveryOrdersController@item');
+//
+//        Route::put('/address', 'MobileApi\DeliveryOrdersController@address');
+//        Route::get('/comments', 'MobileApi\DeliveryOrdersController@comments');
+//        Route::post('/comment', 'MobileApi\DeliveryOrdersController@comment');
+//
+//        Route::post('/status', 'MobileApi\DeliveryOrdersController@status');
+//
+//        Route::get('/counties', 'MobileApi\DeliveryOrdersController@counties');
+//    });
+//
+//    Route::prefix('/files')->group(function (){
+//        Route::post('/upload', 'MobileApi\FilesController@upload');
+//        Route::get('/download/{fileId}', 'MobileApi\FilesController@download');
+//    });
+//});
 
-        Route::put('/address', 'MobileApi\DeliveryOrdersController@address');
-        Route::get('/comments', 'MobileApi\DeliveryOrdersController@comments');
-        Route::post('/comment', 'MobileApi\DeliveryOrdersController@comment');
+Route::prefix('/orders')->group(function (){
+    Route::get('/list', 'MobileApi\DeliveryOrdersController@list1');
+    Route::get('/item', 'MobileApi\DeliveryOrdersController@item');
 
-        Route::post('/status', 'MobileApi\DeliveryOrdersController@status');
+    Route::put('/address', 'MobileApi\DeliveryOrdersController@address');
+    Route::get('/comments', 'MobileApi\DeliveryOrdersController@comments');
+    Route::post('/comment', 'MobileApi\DeliveryOrdersController@comment');
 
-        Route::get('/counties', 'MobileApi\DeliveryOrdersController@counties');
-    });
+    Route::post('/status', 'MobileApi\DeliveryOrdersController@status');
 
-    Route::prefix('/files')->group(function (){
-        Route::post('/upload', 'MobileApi\FilesController@upload');
-        Route::get('/download/{fileId}', 'MobileApi\FilesController@download');
-    });
+    Route::get('/counties', 'MobileApi\DeliveryOrdersController@counties');
+});
+
+Route::prefix('/files')->group(function (){
+    Route::post('/upload', 'MobileApi\FilesController@upload');
+    Route::get('/download/{fileId}', 'MobileApi\FilesController@download');
 });
 
 //Route::middleware('auth:api')->get('/user', function (Request $request) {
