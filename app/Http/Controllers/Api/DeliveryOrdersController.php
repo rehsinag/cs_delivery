@@ -6,6 +6,7 @@ use App\DeliveryOrder;
 use App\DeliveryOrderHistory;
 use App\DeliveryOrderStatus;
 use App\DeliveryUser;
+use App\SpringDocStatus;
 use App\Status;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -207,13 +208,12 @@ class DeliveryOrdersController extends Controller
     public function bankStatus()
     {
         $requestId = Input::get('requestId');
-        $eventId = Input::get('eventId');
         $comments = Input::get('comments');
         $status = Input::get('status');
 
         $deliveryOrder = DeliveryOrder::where('requestId', $requestId)->first();
 
-        if($deliveryOrder && !$eventId)
+        if($deliveryOrder && $status == SpringDocStatus::ACCEPT)
         {
             if($comments)
                 $deliveryOrder->comments = $comments;
@@ -231,7 +231,7 @@ class DeliveryOrdersController extends Controller
             $historyOrder->requestId = $deliveryOrder->requestId;
             $historyOrder->productId = $deliveryOrder->productId;
             $historyOrder->branchId = $deliveryOrder->branchId;
-            $historyOrder->eventId = $deliveryOrder->eventId;
+//            $historyOrder->eventId = $deliveryOrder->eventId;
             $historyOrder->deliveryUserId = $deliveryOrder->deliveryUserId;
             $historyOrder->city = $deliveryOrder->city;
             $historyOrder->county = $deliveryOrder->county;
@@ -256,7 +256,7 @@ class DeliveryOrdersController extends Controller
             ], 200);
         }
 
-        if($deliveryOrder && $eventId)
+        if($deliveryOrder && $status == SpringDocStatus::REWORK)
         {
             if($comments)
                 $deliveryOrder->comments = $comments;
@@ -278,7 +278,7 @@ class DeliveryOrdersController extends Controller
             $historyOrder->requestId = $deliveryOrder->requestId;
             $historyOrder->productId = $deliveryOrder->productId;
             $historyOrder->branchId = $deliveryOrder->branchId;
-            $historyOrder->eventId = $deliveryOrder->eventId;
+//            $historyOrder->eventId = $deliveryOrder->eventId;
             $historyOrder->deliveryUserId = $deliveryOrder->deliveryUserId;
             $historyOrder->city = $deliveryOrder->city;
             $historyOrder->county = $deliveryOrder->county;
@@ -320,7 +320,7 @@ class DeliveryOrdersController extends Controller
             $newDeliveryOrder->comments = $historyOrder->comments;
 
 //            $newDeliveryOrder = DeliveryOrder::where('requestId', $requestId)->first();
-            $newDeliveryOrder->eventId = $eventId;
+//            $newDeliveryOrder->eventId = $eventId;
             $newDeliveryOrder->status = Status::REAPPLICATION;
             $newDeliveryOrder->springDocStatus = null;
             $newDeliveryOrder->sicStatus = 'N';
