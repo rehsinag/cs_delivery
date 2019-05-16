@@ -231,7 +231,7 @@ class DeliveryOrdersController extends Controller
             $historyOrder->requestId = $deliveryOrder->requestId;
             $historyOrder->productId = $deliveryOrder->productId;
             $historyOrder->branchId = $deliveryOrder->branchId;
-//            $historyOrder->eventId = $deliveryOrder->eventId;
+            $historyOrder->eventId = 0;
             $historyOrder->deliveryUserId = $deliveryOrder->deliveryUserId;
             $historyOrder->city = $deliveryOrder->city;
             $historyOrder->county = $deliveryOrder->county;
@@ -278,7 +278,7 @@ class DeliveryOrdersController extends Controller
             $historyOrder->requestId = $deliveryOrder->requestId;
             $historyOrder->productId = $deliveryOrder->productId;
             $historyOrder->branchId = $deliveryOrder->branchId;
-//            $historyOrder->eventId = $deliveryOrder->eventId;
+            $historyOrder->eventId = 0;
             $historyOrder->deliveryUserId = $deliveryOrder->deliveryUserId;
             $historyOrder->city = $deliveryOrder->city;
             $historyOrder->county = $deliveryOrder->county;
@@ -320,7 +320,7 @@ class DeliveryOrdersController extends Controller
             $newDeliveryOrder->comments = $historyOrder->comments;
 
 //            $newDeliveryOrder = DeliveryOrder::where('requestId', $requestId)->first();
-//            $newDeliveryOrder->eventId = $eventId;
+            $newDeliveryOrder->eventId = 0;
             $newDeliveryOrder->status = Status::REAPPLICATION;
             $newDeliveryOrder->springDocStatus = null;
             $newDeliveryOrder->sicStatus = 'N';
