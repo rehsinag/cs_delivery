@@ -15,9 +15,9 @@ class ChangeDeliveryOrdersProcessedView150520191 extends Migration
     {
         DB::unprepared('ALTER VIEW `deliveryOrdersProcessed` AS
         SELECT *, 
-        (SELECT CONCAT(`firstName`, \' \', `lastName`, \' \', `middleName`) FROM `deliveryusers` u WHERE u.id=deliveryUserId) As `cFIO`, 
-        (SELECT `text` FROM `deliveryuserscomments` c WHERE c.requestId=`o`.requestId ORDER BY `created_at` DESC LIMIT 1) AS `cComment` 
-        FROM `deliveryorders` as `o` 
+        (SELECT CONCAT(`firstName`, \' \', `lastName`, \' \', `middleName`) FROM `deliveryUsers` u WHERE u.id=deliveryUserId) As `cFIO`, 
+        (SELECT `text` FROM `deliveryUsersComments` c WHERE c.requestId=`o`.requestId ORDER BY `created_at` DESC LIMIT 1) AS `cComment` 
+        FROM `deliveryOrders` as `o` 
         WHERE `status` IN ("' . \App\Status::DELIVERED .'", "' . \App\Status::REJECT_PRODUCT .'", "' . \App\Status::REJECT_DELIVERY .'", "' . \App\Status::REJECT_VISUAL .'", "' . \App\Status::NOT_DIAL .'") 
         ');
     }
