@@ -44,7 +44,7 @@ class DeliveryOrdersController extends Controller
                     'success' => true,
                     'status' => 200,
                     'message' => 'Заявка была успешно добавлена.'
-                ], 200);
+                ], 200, ['Content-Type' => 'application/json;charset=UTF-8', 'Charset' => 'utf-8'], JSON_UNESCAPED_UNICODE);
             }
         }
         else
@@ -75,7 +75,7 @@ class DeliveryOrdersController extends Controller
                         'success' => true,
                         'status' => 200,
                         'message' => 'Статус SIC был успешно изменен.'
-                    ], 200);
+                    ], 200, ['Content-Type' => 'application/json;charset=UTF-8', 'Charset' => 'utf-8'], JSON_UNESCAPED_UNICODE);
                 }
             }
             else
@@ -134,7 +134,7 @@ class DeliveryOrdersController extends Controller
                         'message' => [
                             'files' => $output
                         ]
-                    ], 200);
+                    ], 200, ['Content-Type' => 'application/json;charset=UTF-8', 'Charset' => 'utf-8'], JSON_UNESCAPED_UNICODE);
                 }
                 else
                 {
@@ -253,7 +253,7 @@ class DeliveryOrdersController extends Controller
                 'success' => true,
                 'status' => 200,
                 'message' => 'Успешно выполнено'
-            ], 200);
+            ], 200, ['Content-Type' => 'application/json;charset=UTF-8', 'Charset' => 'utf-8'], JSON_UNESCAPED_UNICODE);
         }
 
         if($deliveryOrder && $status == SpringDocStatus::REWORK)
@@ -333,7 +333,7 @@ class DeliveryOrdersController extends Controller
                 'success' => true,
                 'status' => 200,
                 'message' => 'Успешно выполнено'
-            ], 200);
+            ], 200, ['Content-Type' => 'application/json;charset=UTF-8', 'Charset' => 'utf-8'], JSON_UNESCAPED_UNICODE);
         }
     }
 
