@@ -188,7 +188,8 @@ class DeliveryOrder extends Model implements HasMedia
         $deliveryOrder->branchId = $this->branchId;
         $deliveryOrder->eventId = $this->eventId;
         $deliveryOrder->city = $this->city;
-        $deliveryOrder->county = $this->county;
+        $deliveryOrder->county = 0;
+        $deliveryOrder->countyName = $this->county;
         $deliveryOrder->street = $this->street;
         $deliveryOrder->house = $this->house;
         $deliveryOrder->apartment = $this->apartment;

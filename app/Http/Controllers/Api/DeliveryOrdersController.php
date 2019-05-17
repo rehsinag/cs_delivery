@@ -234,7 +234,8 @@ class DeliveryOrdersController extends Controller
             $historyOrder->eventId = 0;
             $historyOrder->deliveryUserId = $deliveryOrder->deliveryUserId;
             $historyOrder->city = $deliveryOrder->city;
-            $historyOrder->county = $deliveryOrder->county;
+            $historyOrder->county = 0;
+            $historyOrder->countyName = $deliveryOrder->countyName;
             $historyOrder->street = $deliveryOrder->street;
             $historyOrder->house = $deliveryOrder->house;
             $historyOrder->apartment = $deliveryOrder->apartment;
@@ -281,7 +282,8 @@ class DeliveryOrdersController extends Controller
             $historyOrder->eventId = 0;
             $historyOrder->deliveryUserId = $deliveryOrder->deliveryUserId;
             $historyOrder->city = $deliveryOrder->city;
-            $historyOrder->county = $deliveryOrder->county;
+            $historyOrder->county = 0;
+            $historyOrder->countyName = $deliveryOrder->countyName;
             $historyOrder->street = $deliveryOrder->street;
             $historyOrder->house = $deliveryOrder->house;
             $historyOrder->apartment = $deliveryOrder->apartment;
@@ -312,7 +314,8 @@ class DeliveryOrdersController extends Controller
             $newDeliveryOrder->productId = $historyOrder->productId;
             $newDeliveryOrder->branchId = $historyOrder->branchId;
             $newDeliveryOrder->city = $historyOrder->city;
-            $newDeliveryOrder->county = $historyOrder->county;
+            $newDeliveryOrder->county = 0;
+            $newDeliveryOrder->countyName = $historyOrder->countyName;
             $newDeliveryOrder->street = $historyOrder->street;
             $newDeliveryOrder->house = $historyOrder->house;
             $newDeliveryOrder->apartment = $historyOrder->apartment;
