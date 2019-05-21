@@ -12,11 +12,11 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Styles -->
-    <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/datatables.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/all.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/dashboard.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/csDelivery.css') }}?v={{$versionForStylesAndScripts}}" rel="stylesheet">
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/datatables.min.css" rel="stylesheet">
+    <link href="/css/all.min.css" rel="stylesheet">
+    <link href="/css/dashboard.css" rel="stylesheet">
+    <link href="/css/csDelivery.css?v={{$versionForStylesAndScripts}}" rel="stylesheet">
     {{--<link href="{{ asset('css/app.css') }}" rel="stylesheet">--}}
 </head>
 <body>
