@@ -59,7 +59,7 @@ class DeliveryOrdersController extends Controller
                 {
                     $deliveryOrder->initProduct();
                     $deliveryOrder->initCity();
-                    $deliveryOrder->initCounty();
+//                    $deliveryOrder->initCounty();
 
                     $sid = [];
                     $files = $deliveryOrder->getMedia('orderClientDocs');
@@ -82,8 +82,8 @@ class DeliveryOrdersController extends Controller
                         'middle_name' => $deliveryOrder->middleName,
                         'iin' => $deliveryOrder->iin,
                         'phone' => $deliveryOrder->phone,
-                        'county' => $deliveryOrder->countyObj->displayName,
-                        'county_code' => $deliveryOrder->countyObj->code,
+                        'county' => $deliveryOrder->countyName,
+//                        'county_code' => $deliveryOrder->countyObj->code,
                         'city' => $deliveryOrder->cityObj->displayName,
                         'city_code' => $deliveryOrder->cityObj->code,
                         'street' => $deliveryOrder->street,
