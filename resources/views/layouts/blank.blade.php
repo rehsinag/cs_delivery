@@ -30,11 +30,11 @@
 {{--</div>--}}
 
 <!-- Scripts -->
-<script src="{{ asset('js/jquery-3.3.1.min.js') }}"></script>
-<script src="{{ asset('js/datatables.min.js') }}"></script>
-<script src="{{ asset('js/bootstrap.min.js') }}"></script>
-<script src="{{ asset('js/bootstrap-notify.min.js') }}"></script>
-<script src="{{ asset('js/csDelivery.js') }}"></script>
+<script src="/js/jquery-3.3.1.min.js"></script>
+<script src="/js/datatables.min.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/bootstrap-notify.min.js"></script>
+<script src="/js/csDelivery.js"></script>
 {{--<script src="{{ asset('js/app.js') }}"></script>--}}
 @yield('scripts')
 </body>
