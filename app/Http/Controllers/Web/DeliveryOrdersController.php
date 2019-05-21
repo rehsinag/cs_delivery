@@ -206,7 +206,7 @@ class DeliveryOrdersController extends Controller
         if($fileId)
         {
             $file = Media::find($fileId);
-            $path = storage_path('media/' . $fileId . '/' . $file->file_name);
+            $path = storage_path('clientDocs/' . $fileId . '/' . $file->file_name);
             return response()->file($path);
         }
     }
