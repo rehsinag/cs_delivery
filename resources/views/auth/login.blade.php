@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="text-center">
-    <form class="form-signin" method="POST" action="{{ route('login') }}">
+    <form class="form-signin" method="POST" action="{{ route('login', [], false) }}">
         {{ csrf_field() }}
 
         <h1 class="h3 mb-3 font-weight-normal">
