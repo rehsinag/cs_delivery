@@ -25,11 +25,11 @@
     <ul class="navbar-nav px-3">
         <li class="nav-item text-nowrap">
             <a class="nav-link"
-               href="{{ route('logout') }}"
+               href="{{ route2('logout', [], false) }}"
                onclick="event.preventDefault();
                document.getElementById('logout-form').submit();"
             >Выйти</a>
-            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+            <form id="logout-form" action="{{ route2('logout') }}" method="POST" style="display: none;">
                 {{ csrf_field() }}
             </form>
         </li>
@@ -42,55 +42,55 @@
                 <ul class="nav flex-column">
                     @role('root')
                     <li class="nav-item">
-                        <a class="nav-link @if(\Illuminate\Support\Facades\Route::currentRouteName() == 'adminUsers') active @endif" href="{{ route('adminUsers') }}">
+                        <a class="nav-link @if(\Illuminate\Support\Facades\Route::currentRouteName() == 'adminUsers') active @endif" href="{{ route2('adminUsers') }}">
                             Управление пользователями
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link @if(\Illuminate\Support\Facades\Route::currentRouteName() == 'catalogs.branches') active @endif" href="{{ route('catalogs.branches') }}">
+                        <a class="nav-link @if(\Illuminate\Support\Facades\Route::currentRouteName() == 'catalogs.branches') active @endif" href="{{ route2('catalogs.branches') }}">
                             Справочники филиалов
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link @if(\Illuminate\Support\Facades\Route::currentRouteName() == 'catalogs.cities') active @endif" href="{{ route('catalogs.cities') }}">
+                        <a class="nav-link @if(\Illuminate\Support\Facades\Route::currentRouteName() == 'catalogs.cities') active @endif" href="{{ route2('catalogs.cities') }}">
                             Справочники городов
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link @if(\Illuminate\Support\Facades\Route::currentRouteName() == 'catalogs.counties') active @endif" href="{{ route('catalogs.counties') }}">
+                        <a class="nav-link @if(\Illuminate\Support\Facades\Route::currentRouteName() == 'catalogs.counties') active @endif" href="{{ route2('catalogs.counties') }}">
                             Справочники районов
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link @if(\Illuminate\Support\Facades\Route::currentRouteName() == 'adminUsersRoles') active @endif" href="{{ route('adminUsersRoles') }}">
+                        <a class="nav-link @if(\Illuminate\Support\Facades\Route::currentRouteName() == 'adminUsersRoles') active @endif" href="{{ route2('adminUsersRoles') }}">
                             Управление ролями
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link @if(\Illuminate\Support\Facades\Route::currentRouteName() == 'products') active @endif" href="{{ route('products') }}">
+                        <a class="nav-link @if(\Illuminate\Support\Facades\Route::currentRouteName() == 'products') active @endif" href="{{ route2('products') }}">
                             Продукты
                         </a>
                     </li>
                     <hr>
                     @endrole
                     <li class="nav-item">
-                        <a class="nav-link @if(\Illuminate\Support\Facades\Route::currentRouteName() == 'deliveryCompanies') active @endif" href="{{ route('deliveryCompanies') }}">
+                        <a class="nav-link @if(\Illuminate\Support\Facades\Route::currentRouteName() == 'deliveryCompanies') active @endif" href="{{ route2('deliveryCompanies') }}">
                             Курьерские компании
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link @if(\Illuminate\Support\Facades\Route::currentRouteName() == 'deliveryUsers') active @endif" href="{{ route('deliveryUsers') }}">
+                        <a class="nav-link @if(\Illuminate\Support\Facades\Route::currentRouteName() == 'deliveryUsers') active @endif" href="{{ route2('deliveryUsers') }}">
                             Курьеры
                         </a>
                     </li>
                     <hr>
                     <li class="nav-item">
-                        <a class="nav-link @if(\Illuminate\Support\Facades\Route::currentRouteName() == 'deliveryOrders.setCourier') active @endif" href="{{ route('deliveryOrders.setCourier') }}">
+                        <a class="nav-link @if(\Illuminate\Support\Facades\Route::currentRouteName() == 'deliveryOrders.setCourier') active @endif" href="{{ route2('deliveryOrders.setCourier') }}">
                             Досье принято
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link @if(\Illuminate\Support\Facades\Route::currentRouteName() == 'deliveryOrders') active @endif" href="{{ route('deliveryOrders') }}">
+                        <a class="nav-link @if(\Illuminate\Support\Facades\Route::currentRouteName() == 'deliveryOrders') active @endif" href="{{ route2('deliveryOrders') }}">
                             Заявки
                         </a>
                     </li>
@@ -132,8 +132,8 @@
                     {{--<ul class="nav navbar-nav navbar-right">--}}
                         {{--<!-- Authentication Links -->--}}
                         {{--@if (Auth::guest())--}}
-                            {{--<li><a href="{{ route('login') }}">Login</a></li>--}}
-                            {{--<li><a href="{{ route('register') }}">Register</a></li>--}}
+                            {{--<li><a href="{{ route2('login') }}">Login</a></li>--}}
+                            {{--<li><a href="{{ route2('register') }}">Register</a></li>--}}
                         {{--@else--}}
                             {{--<li class="dropdown">--}}
                                 {{--<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">--}}
@@ -142,13 +142,13 @@
 
                                 {{--<ul class="dropdown-menu" role="menu">--}}
                                     {{--<li>--}}
-                                        {{--<a href="{{ route('logout') }}"--}}
+                                        {{--<a href="{{ route2('logout') }}"--}}
                                             {{--onclick="event.preventDefault();--}}
                                                      {{--document.getElementById('logout-form').submit();">--}}
                                             {{--Logout--}}
                                         {{--</a>--}}
 
-                                        {{--<form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">--}}
+                                        {{--<form id="logout-form" action="{{ route2('logout') }}" method="POST" style="display: none;">--}}
                                             {{--{{ csrf_field() }}--}}
                                         {{--</form>--}}
                                     {{--</li>--}}

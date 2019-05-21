@@ -40,7 +40,7 @@
 
             list: function () {
                 $.ajax({
-                    url: '{{ route('catalogs.counties.list') }}',
+                    url: '{{ route2('catalogs.counties.list') }}',
                     data: Counties.opts,
                     beforeSend: function(){csDeliveryPreloader('show')},
                     complete: function(){csDeliveryPreloader('hide')},
@@ -60,7 +60,7 @@
                 if(typeof countyId=='undefined')
                     countyId=''
                 $.ajax({
-                    url: "{{ route('catalogs.counties.edit') }}",
+                    url: "{{ route2('catalogs.counties.edit') }}",
                     type: 'get',
                     data: 'countyId='+countyId,
                     beforeSend: function(){csDeliveryPreloader('show')},
@@ -80,7 +80,7 @@
 
             submit: function () {
                 $.ajax({
-                    url: "{{ route('catalogs.counties.submit') }}",
+                    url: "{{ route2('catalogs.counties.submit') }}",
                     type: 'post',
                     data: $('#countyModalForm').serialize(),
                     beforeSend: function(){csDeliveryPreloader('show')},
@@ -120,7 +120,7 @@
                     }
                 });
                 $.ajax({
-                    url: "{{ route('catalogs.counties.delete') }}",
+                    url: "{{ route2('catalogs.counties.delete') }}",
                     type: 'post',
                     data: 'countyId='+countyId,
                     beforeSend: function(){csDeliveryPreloader('show')},

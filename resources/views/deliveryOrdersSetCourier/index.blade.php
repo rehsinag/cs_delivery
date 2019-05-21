@@ -40,7 +40,7 @@
 
             list: function () {
                 $.ajax({
-                    url: '{{ route('deliveryOrders.setCourier.list') }}',
+                    url: '{{ route2('deliveryOrders.setCourier.list') }}',
                     data: DeliveryOrders.opts,
                     beforeSend: function(){csDeliveryPreloader('show')},
                     complete: function(){csDeliveryPreloader('hide')},
@@ -60,7 +60,7 @@
                 if(typeof deliveryOrderId=='undefined')
                     deliveryOrderId=''
                 $.ajax({
-                    url: "{{ route('deliveryOrders.setCourier.edit') }}",
+                    url: "{{ route2('deliveryOrders.setCourier.edit') }}",
                     type: 'get',
                     data: 'deliveryOrderId='+deliveryOrderId,
                     beforeSend: function(){csDeliveryPreloader('show')},
@@ -80,7 +80,7 @@
 
             submit: function () {
                 $.ajax({
-                    url: "{{ route('deliveryOrders.setCourier.submit') }}",
+                    url: "{{ route2('deliveryOrders.setCourier.submit') }}",
                     type: 'post',
                     data: $('#deliveryOrderModalForm').serialize(),
                     beforeSend: function(){csDeliveryPreloader('show')},

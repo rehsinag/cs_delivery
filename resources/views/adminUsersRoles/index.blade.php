@@ -39,7 +39,7 @@
 
             list: function () {
                 $.ajax({
-                    url: '{{ route('adminUsersRoles.list') }}',
+                    url: '{{ route2('adminUsersRoles.list') }}',
                     data: AdminUsersRoles.opts,
                     beforeSend: function(){csDeliveryPreloader('show')},
                     complete: function(){csDeliveryPreloader('hide')},
@@ -59,7 +59,7 @@
                 if(typeof adminUsersRoleId=='undefined')
                     adminUsersRoleId=''
                 $.ajax({
-                    url: "{{ route('adminUsersRoles.edit') }}",
+                    url: "{{ route2('adminUsersRoles.edit') }}",
                     type: 'get',
                     data: 'adminUsersRoleId='+adminUsersRoleId,
                     beforeSend: function(){csDeliveryPreloader('show')},
@@ -79,7 +79,7 @@
 
             submit: function () {
                 $.ajax({
-                    url: "{{ route('adminUsersRoles.submit') }}",
+                    url: "{{ route2('adminUsersRoles.submit') }}",
                     type: 'post',
                     data: $('#adminUsersRoleModalForm').serialize(),
                     beforeSend: function(){csDeliveryPreloader('show')},
@@ -119,7 +119,7 @@
                     }
                 });
                 $.ajax({
-                    url: "{{ route('adminUsersRoles.delete') }}",
+                    url: "{{ route2('adminUsersRoles.delete') }}",
                     type: 'post',
                     data: 'adminUsersRoleId='+adminUsersRoleId,
                     beforeSend: function(){csDeliveryPreloader('show')},

@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="text-center">
-    <form class="form-signin" method="POST" action="{{ route('login', [], false) }}">
+    <form class="form-signin" method="POST" action="{{ route2('login') }}">
         {{ csrf_field() }}
 
         <h1 class="h3 mb-3 font-weight-normal">
@@ -29,7 +29,7 @@
                 {{--<div class="panel-heading">Login</div>--}}
 
                 {{--<div class="panel-body">--}}
-                    {{--<form class="form-horizontal" method="POST" action="{{ route('login') }}">--}}
+                    {{--<form class="form-horizontal" method="POST" action="{{ route2('login') }}">--}}
                         {{--{{ csrf_field() }}--}}
 
                         {{--<div class="form-group{{ $errors->has('login') ? ' has-error' : '' }}">--}}

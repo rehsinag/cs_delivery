@@ -32,7 +32,7 @@
                             <ul>
                                 @foreach($deliveryOrder->getMedia('orderClientDocs') as $media)
                                     <li>
-                                        <a href="{{ route('deliveryOrders.file', $media->id) }}" target="_blank">
+                                        <a href="{{ route2('deliveryOrders.file', $media->id) }}" target="_blank">
                                             {{ $media->file_name }}
                                         </a>
                                     </li>

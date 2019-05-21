@@ -40,7 +40,7 @@
 
             list: function () {
                 $.ajax({
-                    url: '{{ route('deliveryCompanies.list') }}',
+                    url: '{{ route2('deliveryCompanies.list') }}',
                     data: DeliveryCompanies.opts,
                     beforeSend: function(){csDeliveryPreloader('show')},
                     complete: function(){csDeliveryPreloader('hide')},
@@ -60,7 +60,7 @@
                 if(typeof deliveryCompanyId=='undefined')
                     deliveryCompanyId=''
                 $.ajax({
-                    url: "{{ route('deliveryCompanies.edit') }}",
+                    url: "{{ route2('deliveryCompanies.edit') }}",
                     type: 'get',
                     data: 'deliveryCompanyId='+deliveryCompanyId,
                     beforeSend: function(){csDeliveryPreloader('show')},
@@ -80,7 +80,7 @@
 
             submit: function () {
                 $.ajax({
-                    url: "{{ route('deliveryCompanies.submit') }}",
+                    url: "{{ route2('deliveryCompanies.submit') }}",
                     type: 'post',
                     data: $('#deliveryCompanyModalForm').serialize(),
                     beforeSend: function(){csDeliveryPreloader('show')},
@@ -120,7 +120,7 @@
                     }
                 });
                 $.ajax({
-                    url: "{{ route('deliveryCompanies.delete') }}",
+                    url: "{{ route2('deliveryCompanies.delete') }}",
                     type: 'post',
                     data: 'deliveryCompanyId='+deliveryCompanyId,
                     beforeSend: function(){csDeliveryPreloader('show')},

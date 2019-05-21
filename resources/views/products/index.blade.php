@@ -40,7 +40,7 @@
 
             list: function () {
                 $.ajax({
-                    url: '{{ route('products.list') }}',
+                    url: '{{ route2('products.list') }}',
                     data: Products.opts,
                     beforeSend: function(){csDeliveryPreloader('show')},
                     complete: function(){csDeliveryPreloader('hide')},
@@ -60,7 +60,7 @@
                 if(typeof productId=='undefined')
                     productId=''
                 $.ajax({
-                    url: "{{ route('products.edit') }}",
+                    url: "{{ route2('products.edit') }}",
                     type: 'get',
                     data: 'productId='+productId,
                     beforeSend: function(){csDeliveryPreloader('show')},
@@ -80,7 +80,7 @@
 
             submit: function () {
                 $.ajax({
-                    url: "{{ route('products.submit') }}",
+                    url: "{{ route2('products.submit') }}",
                     type: 'post',
                     data: $('#productModalForm').serialize(),
                     beforeSend: function(){csDeliveryPreloader('show')},
@@ -120,7 +120,7 @@
                     }
                 });
                 $.ajax({
-                    url: "{{ route('products.delete') }}",
+                    url: "{{ route2('products.delete') }}",
                     type: 'post',
                     data: 'productId='+productId,
                     beforeSend: function(){csDeliveryPreloader('show')},

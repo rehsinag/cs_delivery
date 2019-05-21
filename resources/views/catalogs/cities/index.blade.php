@@ -40,7 +40,7 @@
 
             list: function () {
                 $.ajax({
-                    url: '{{ route('catalogs.cities.list') }}',
+                    url: '{{ route2('catalogs.cities.list') }}',
                     data: Cities.opts,
                     beforeSend: function(){csDeliveryPreloader('show')},
                     complete: function(){csDeliveryPreloader('hide')},
@@ -60,7 +60,7 @@
                 if(typeof cityId=='undefined')
                     cityId=''
                 $.ajax({
-                    url: "{{ route('catalogs.cities.edit') }}",
+                    url: "{{ route2('catalogs.cities.edit') }}",
                     type: 'get',
                     data: 'cityId='+cityId,
                     beforeSend: function(){csDeliveryPreloader('show')},
@@ -80,7 +80,7 @@
 
             submit: function () {
                 $.ajax({
-                    url: "{{ route('catalogs.cities.submit') }}",
+                    url: "{{ route2('catalogs.cities.submit') }}",
                     type: 'post',
                     data: $('#cityModalForm').serialize(),
                     beforeSend: function(){csDeliveryPreloader('show')},
@@ -120,7 +120,7 @@
                     }
                 });
                 $.ajax({
-                    url: "{{ route('catalogs.cities.delete') }}",
+                    url: "{{ route2('catalogs.cities.delete') }}",
                     type: 'post',
                     data: 'cityId='+cityId,
                     beforeSend: function(){csDeliveryPreloader('show')},

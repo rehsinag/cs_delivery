@@ -40,7 +40,7 @@
 
             list: function () {
                 $.ajax({
-                    url: '{{ route('catalogs.branches.list') }}',
+                    url: '{{ route2('catalogs.branches.list') }}',
                     data: Branches.opts,
                     beforeSend: function(){csDeliveryPreloader('show')},
                     complete: function(){csDeliveryPreloader('hide')},
@@ -60,7 +60,7 @@
                 if(typeof branchId=='undefined')
                     branchId=''
                 $.ajax({
-                    url: "{{ route('catalogs.branches.edit') }}",
+                    url: "{{ route2('catalogs.branches.edit') }}",
                     type: 'get',
                     data: 'branchId='+branchId,
                     beforeSend: function(){csDeliveryPreloader('show')},
@@ -80,7 +80,7 @@
 
             submit: function () {
                 $.ajax({
-                    url: "{{ route('catalogs.branches.submit') }}",
+                    url: "{{ route2('catalogs.branches.submit') }}",
                     type: 'post',
                     data: $('#branchModalForm').serialize(),
                     beforeSend: function(){csDeliveryPreloader('show')},
@@ -120,7 +120,7 @@
                     }
                 });
                 $.ajax({
-                    url: "{{ route('catalogs.branches.delete') }}",
+                    url: "{{ route2('catalogs.branches.delete') }}",
                     type: 'post',
                     data: 'branchId='+branchId,
                     beforeSend: function(){csDeliveryPreloader('show')},
