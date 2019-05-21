@@ -20,7 +20,7 @@
                 <tr id="{{ $deliveryOrder->id }}">
                     <td>{{ \Carbon\Carbon::parse($deliveryOrder->created_at)->format('d.m.Y H:i:s') }}</td>
                     <td>{{ \Carbon\Carbon::parse($deliveryOrder->deliveryDate)->format('d.m.Y') }}</td>
-                    <td>{{ $deliveryOrder->id }}</td>
+                    <td>{{ $deliveryOrder->requestId }}</td>
                     <td>{{ $deliveryOrder->lastName }}</td>
                     <td>{{ $deliveryOrder->firstName }}</td>
                     <td>{{ $deliveryOrder->middleName }}</td>
