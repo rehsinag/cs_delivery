@@ -125,8 +125,8 @@ class DeliveryOrder extends Model implements HasMedia
         if(!$this->lastName || $this->lastName == null)
             $errors[] = 'Необходимо указать Фамилию клиента!';
             
-        if(!$this->middleName || $this->middleName == null)
-            $errors[] = 'Необходимо указать Отчество клиента!';
+//        if(!$this->middleName || $this->middleName == null)
+//            $errors[] = 'Необходимо указать Отчество клиента!';
 
         if(!$this->iin || $this->iin == null)
             $errors[] = 'Необходимо указать ИИН клиента!';
@@ -180,7 +180,8 @@ class DeliveryOrder extends Model implements HasMedia
 
         $deliveryOrder->firstName = $this->firstName;
         $deliveryOrder->lastName = $this->lastName;
-        $deliveryOrder->middleName = $this->middleName;
+        if(isset($this->middleName) && $this->middleName)
+            $deliveryOrder->middleName = $this->middleName;
         $deliveryOrder->iin = $this->iin;
         $deliveryOrder->phone = $this->phone;
         $deliveryOrder->requestId = $this->requestId;
